@@ -15,87 +15,89 @@ generate formatted output (HTML, LaTeX, TeX, RTF).
 .PP
 See the README file for details.
 .SH File options
-.IP "-i, --input=<file> (default stdin)"
+
+.IP "\fB-i\fR, \fB--input\fR=<\fIfile\fR> (default stdin)"
 Name of input file
-.IP "-o, --output=<file> (default stdout)"
+.IP "\fB-o\fR, \fB--output\fR=<\fIfile\fR> (default stdout)"
+
 Name of output file
-.IP "-O, --outdir=<dir>"
+.IP "\fB-O\fR, \fB--outdir\fR=<\fIdir\fR>"
 Name of output directory
-.IP "-t, --tail"
+.IP "\fB-t\fR, \fB--tail\fR"
 Continue reading after end-of-file (like tail -f). Use system tail if available.
-.IP "-x, --max-size=<size>"
+.IP "\fB-x\fR, \fB--max-size\fR=<\fIsize\fR>"
 Set maximum input file size (examples: 512M, 1G; default: 256M)
 
 .SH Output formats
-.IP "-T, --text"
+.IP "\fB-T\fR, \fB--text\fR"
 Output text (default)
-.IP "-H, --html"
+.IP "\fB-H\fR, \fB--html\fR"
 Output HTML
-.IP "-M, --pango"
+.IP "\fB-M\fR, \fB--pango\fR"
 Output Pango markup
-.IP "-L, --latex"
+.IP "\fB-L\fR, \fB--latex\fR"
 Output LaTeX
-.IP "-P, --tex"
+.IP "\fB-P\fR, \fB--tex\fR"
 Output Plain TeX
-.IP "-R, --rtf"
+.IP "\fB-R\fR, \fB--rtf\fR"
 Output RTF
-.IP "-B, --bbcode"
+.IP "\fB-B\fR, \fB--bbcode\fR"
 Output BBCode
-.IP "-S, --svg"
+.IP "\fB-S\fR, \fB--svg\fR"
 Output SVG
 
 .SH Format options
-.IP "-a, --anchors(=self)"
+.IP "\fB-a\fR, \fB--anchors\fR(=\fIself\fR)"
 Add HTML line anchors (opt: self referencing, assumes -l)
-.IP "-d, --doc-title"
+.IP "\fB-d\fR, \fB--doc-title\fR"
 Set HTML/LaTeX/SVG document title
-.IP "-f, --fragment"
+.IP "\fB-f\fR, \fB--fragment\fR"
 Omit HTML header and footer
-.IP "-F, --font=<font>"
+.IP "\fB-F\fR, \fB--font\fR=<\fIfont\fR>"
 Set HTML/RTF/SVG font face
-.IP "-k, --ignore-clear(=false)"
+.IP "\fB-k\fR, \fB--ignore-clear\fR(=\fIfalse\fR)"
 Do not adhere to clear (ESC K) commands (default: true)
-.IP "-c, --ignore-csi"
+.IP "\fB-c\fR, \fB--ignore-csi\fR"
 Do not adhere to CSI commands (useful for UTF-8 input)
-.IP "-l, --line-numbers"
+.IP "\fB-l\fR, \fB--line-numbers\fR"
 Print line numbers in output file
-.IP "-m, --map=<path>"
+.IP "\fB-m\fR, \fB--map\fR=<\fIpath\fR>"
 Read color mapping file (see README)
-.IP "-r, --style-ref=<rf>"
+.IP "\fB-r\fR, \fB--style-ref\fR=<\fIrf\fR>"
 Set HTML/TeX/LaTeX/SVG stylesheet path
-.IP "-s, --font-size=<num?>"
+.IP "\fB-s\fR, \fB--font-size\fR=<\fInum\fR>"
 Set HTML/RTF/SVG font size
-.IP "-e, --encoding=<enc>"
+.IP "\fB-e\fR, \fB--encoding\fR=<\fIenc\fR>"
 Set HTML encoding (must match input file encoding); omit encoding information if enc=NONE
-.IP "-p, --plain"
+.IP "\fB-p\fR, \fB--plain\fR"
 Ignore ANSI formatting information
-.IP "-w, --wrap=<len>"
+.IP "\fB-w\fR, \fB--wrap\fR=<\fIlen\fR>"
 Wrap long lines
-.IP "--no-trailing-nl"
+.IP "\fB--no-trailing-nl\fR"
 Omit trailing newline
-.IP "--no-version-info"
+.IP "\fB--no-version-info\fR"
 Omit version info comment
-.IP "--wrap-no-numbers"
+.IP "\fB--wrap-no-numbers\fR"
 Omit line numbers of wrapped lines (assumes -l)
-.IP "--derived-styles"
+.IP "\fB--derived-styles\fR"
 Output dynamic stylesheets (HTML/SVG)
 
 .SH ASCII art options
-.IP "--art-cp437"
+.IP "\fB--art-cp437\fR"
 Parse codepage 437 ASCII art (HTML and RTF output)
-.IP "--art-bin"
+.IP "\fB--art-bin\fR"
 Parse BIN/XBIN ASCII art  (HTML output, no stdin)
-.IP "--art-tundra"
+.IP "\fB--art-tundra\fR"
 Parse Tundra ANSI art  (HTML output, no stdin)
-.IP "--art-width"
+.IP "\fB--art-width\fR"
 Set ASCII art width (default 80)
-.IP "--art-height"
+.IP "\fB--art-height\fR"
 Set ASCII art height (default 150)
 
 .SH "OTHER OPTIONS"
-.IP "-h, --help"
+.IP "\fB-h\fR, \fB--help\fR"
 print help
-.IP "-v, --version"
+.IP "\fB-v\fR, \fB--version\fR"
 print version and license info
 
 .PP
