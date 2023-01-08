@@ -1,5 +1,11 @@
 = Ansifilter ChangeLog
 
+=== ansifilter 2.19
+
+08.01.2023
+
+ - added stdin/stdio default stream hints in `--help` (https://gitlab.com/saalen/ansifilter/-/issues/34)
+
 === ansifilter 2.18
 
 30.01.2021

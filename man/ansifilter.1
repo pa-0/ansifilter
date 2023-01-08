@@ -1,4 +1,4 @@
-.TH ansifilter 1 "2020-09-28" "Andre Simon" "user documentation"
+.TH ansifilter 1 "2023-01-08" "Andre Simon" "user documentation"
 
 .SH NAME
 Ansifilter - ANSI escape code processor and converter
@@ -15,16 +15,16 @@ generate formatted output (HTML, LaTeX, TeX, RTF).
 .PP
 See the README file for details.
 .SH File options
-.IP "-i, --input=<file>"
+.IP "-i, --input=<file> (default stdin)"
 Name of input file
-.IP "-o, --output=<file>"
+.IP "-o, --output=<file> (default stdout)"
 Name of output file
 .IP "-O, --outdir=<dir>"
 Name of output directory
 .IP "-t, --tail"
 Continue reading after end-of-file (like tail -f). Use system tail if available.
 .IP "-x, --max-size=<size>"
-Set maximum input file size (examples: 512M, 1G; default: 256M) 
+Set maximum input file size (examples: 512M, 1G; default: 256M)
 
 .SH Output formats
 .IP "-T, --text"
@@ -33,7 +33,7 @@ Output text (default)
 Output HTML
 .IP "-M, --pango"
 Output Pango markup
-.IP "-L, --latex"          
+.IP "-L, --latex"
 Output LaTeX
 .IP "-P, --tex"
 Output Plain TeX

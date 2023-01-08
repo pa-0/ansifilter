@@ -2,7 +2,7 @@
                           main.cpp  -  description
                              -------------------
 
-    copyright            : (C) 2007-2021 by Andre Simon
+    copyright            : (C) 2007-2023 by Andre Simon
     email                : a.simon@mailbox.org
 
    Highlight is a universal source code to HTML converter. Syntax highlighting
@@ -53,8 +53,8 @@ void ANSIFilterApp::printHelp()
     cout << "Invocation: ansifilter [OPTION]... [FILE]...\n\n";
     cout << "ansifilter handles text files containing ANSI terminal escape codes.\n";
     cout << "\nFile handling:\n";
-    cout << "  -i, --input=<file>     Name of input file\n";
-    cout << "  -o, --output=<file>    Name of output file\n";
+    cout << "  -i, --input=<file>     Name of input file (default stdin)\n";
+    cout << "  -o, --output=<file>    Name of output file (default stdout)\n";
     cout << "  -O, --outdir=<dir>     Name of output directory\n";
     cout << "  -t, --tail             Continue reading after end-of-file (like tail -f)\n";
     cout << "  -x, --max-size=<size>  Set maximum input file size\n";
