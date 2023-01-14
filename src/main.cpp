@@ -39,7 +39,7 @@ void ANSIFilterApp::printVersionInfo()
 {
     cout << "\n ansifilter version "
          << Info::getVersion()
-         << "\n Copyright (C) 2007-2021 Andre Simon <a dot simon at mailbox.org>"
+         << "\n Copyright (C) 2007-2023 Andre Simon <a dot simon at mailbox.org>"
          << "\n\n Argparser class"
          << "\n Copyright (C) 2006-2008 Antonio Diaz Diaz <ant_diaz at teleline.es>"
          << "\n\n This software is released under the terms of the GNU General "

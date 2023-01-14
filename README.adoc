@@ -1,6 +1,6 @@
 = ANSIFILTER MANUAL
 André Simon
-v2.15, November 2019
+v2.18, January 2023
 
 
 OSI Certified Open Source Software
@@ -14,16 +14,17 @@ output (HTML, RTF, TeX, LaTeX, BBCode, Pango).
 ===  Quick introduction
 
 ................................................................................
-
 Invocation: ansifilter [OPTION]... [FILE]...
 
 ansifilter handles text files containing ANSI terminal escape codes.
 
 File handling:
-  -i, --input=<file>     Name of input file
-  -o, --output=<file>    Name of output file
+  -i, --input=<file>     Name of input file (default stdin)
+  -o, --output=<file>    Name of output file (default stdout)
   -O, --outdir=<dir>     Name of output directory
   -t, --tail             Continue reading after end-of-file (like tail -f)
+  -x, --max-size=<size>  Set maximum input file size
+                         (examples: 512M, 1G; default: 256M)
 
 Output text formats:
   -T, --text (default)   Output text
@@ -43,6 +44,7 @@ Format options:
   -f, --fragment         Omit HTML header and footer
   -F, --font=<font>      Set HTML/RTF/SVG font face
   -k, --ignore-clear(=0) Do not adhere to clear (ESC K) commands (default: true)
+  -c, --ignore-csi       Do not adhere to CSI commands (useful for UTF-8 input)
   -l, --line-numbers     Print line numbers in output file
   -m, --map=<path>       Read color mapping file (see README)
   -r, --style-ref=<rf>   Set HTML/TeX/LaTeX/SVG stylesheet path
@@ -76,7 +78,6 @@ tail -f server.log | ansifilter
 
 Parsing XBIN files overrides --art-width, --art-height and --map options.
 The ANSI art file formats BIN, XBIN and TND cannot be read from stdin.
-
 ................................................................................
 
 === Platforms
@@ -86,7 +87,7 @@ Ansifilter is currently available for Linux and Win32 platforms.
 === Features
 
 Ansifilter understands most CSI sequences. Support for ANSI art files (based on
-codepage 437 and ANSI.SYS sequences, BIN/XBIN and Tundra files) is enabled with 
+codepage 437 and ANSI.SYS sequences, BIN/XBIN and Tundra files) is enabled with
 the `--art-cp437` and `--art-bin` options.
 Parsing XBIN files overrides `--art-width`, `--art-height` and `--map` options.
 Parsing TND files overrides `--art-width` and `--map` options.
@@ -116,12 +117,12 @@ The command line version recognizes these variables:
 
 === Color mapping
 
-The basic ANSI color set can be adjusted with a color map file (`--map` option). 
+The basic ANSI color set can be adjusted with a color map file (`--map` option).
 This text configuration overrides these color codes:
 
 ................................................................................
 
-Normal: Black (0), Red (1), Green (2), Yellow (3), Blue (4), Magenta (5), 
+Normal: Black (0), Red (1), Green (2), Yellow (3), Blue (4), Magenta (5),
         Cyan (6), Gray (7)
 Bright: DarkGray (8), Red (9), Green (10), Yellow (11), Blue (12), Magenta (13),
         Cyan (14), White (15)
