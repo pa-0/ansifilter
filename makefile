@@ -4,7 +4,7 @@
 # Installation directories:
 
 # Destination directory for installation (intended for packagers)
-DESTDIR = 
+DESTDIR =
 
 # Root directory for final installation
 PREFIX = /usr
@@ -12,15 +12,27 @@ PREFIX = /usr
 # Location of the binary:
 bin_dir = ${PREFIX}/bin/
 
+# Data file directory
+data_dir = ${PREFIX}/share/
+
 # Location of the man page:
-man_dir = ${PREFIX}/share/man/man1/
+man_dir = ${data_dir}man/man1/
 
 # Location of the documentation:
-doc_dir = ${PREFIX}/share/doc/ansifilter/
+doc_dir = ${data_dir}doc/ansifilter/
 
 # Location of additional gui files
-desktop_apps = ${PREFIX}/share/applications/
-desktop_pixmaps = ${PREFIX}/share/pixmaps/
+desktop_apps = ${data_dir}applications/
+desktop_pixmaps = ${data_dir}pixmaps/
+
+# Location of bash completions:
+bash_comp_dir = ${data_dir}bash-completion/completions/
+
+# Location of fish completions:
+fish_comp_dir = ${data_dir}fish/vendor_completions.d/
+
+# Location of zsh completions:
+zsh_comp_dir = ${data_dir}zsh/site-functions/
 
 # Commands:
 GZIP=gzip -9f
@@ -32,7 +44,7 @@ MKDIR=mkdir -p -m 755
 RMDIR=rm -r -f
 
 all:
-	${MAKE} -C ./src -f ./makefile 
+	${MAKE} -C ./src -f ./makefile
 
 all-gui gui:
 	${QMAKE} -makefile -o src/qt-gui/Makefile src/qt-gui/ansifilter-gui.pro
@@ -46,11 +58,17 @@ install:
 	@echo "Documentation directory: ${DESTDIR}${doc_dir}"
 	@echo "Manual directory:        ${DESTDIR}${man_dir}"
 	@echo "Binary directory:        ${DESTDIR}${bin_dir}"
+	@echo "Bash completions:        ${DESTDIR}${bash_comp_dir}"
+	@echo "Fish completions:        ${DESTDIR}${fish_comp_dir}"
+	@echo "Zsh completions:         ${DESTDIR}${zsh_comp_dir}"
 	@echo
 
 	${MKDIR} ${DESTDIR}${doc_dir}
 	${MKDIR} ${DESTDIR}${man_dir}
 	${MKDIR} ${DESTDIR}${bin_dir}
+	${MKDIR} ${DESTDIR}${bash_comp_dir}
+	${MKDIR} ${DESTDIR}${fish_comp_dir}
+	${MKDIR} ${DESTDIR}${zsh_comp_dir}
 
 	${INSTALL_DATA} ./man/ansifilter.1 ${DESTDIR}${man_dir}
 	-${GZIP} ${DESTDIR}${man_dir}ansifilter.1
@@ -58,13 +76,16 @@ install:
 	${INSTALL_DATA} ./ChangeLog.adoc ${DESTDIR}${doc_dir}
 	${INSTALL_DATA} ./COPYING ${DESTDIR}${doc_dir}
 	${INSTALL_DATA} ./INSTALL ${DESTDIR}${doc_dir}
+	${INSTALL_DATA} ./sh-completion/ansifilter.bash ${DESTDIR}${bash_comp_dir}ansifilter
+	${INSTALL_DATA} ./sh-completion/ansifilter.fish ${DESTDIR}${fish_comp_dir}
+	${INSTALL_DATA} ./sh-completion/ansifilter.zsh ${DESTDIR}${zsh_comp_dir}_ansifilter
 	${INSTALL_PROGRAM} ./src/ansifilter ${DESTDIR}${bin_dir}
 
 	@echo
 	@echo "Done."
 	@echo "Type ansifilter --help or man ansifilter for instructions."
 	@echo "Do not hesitate to report problems. Unknown bugs are hard to fix."
-	
+
 install-gui:
 	${INSTALL_PROGRAM} ./src/qt-gui/ansifilter-gui ${DESTDIR}${bin_dir}
 	${MKDIR} ${DESTDIR}${desktop_apps} \
@@ -84,8 +105,11 @@ clean:
 	$(MAKE) -C ./src -f ./makefile clean
 	$(MAKE) -C ./src/tcl -f ./makefile clean
 
-apidocs:
-	doxygen Doxyfile
+
+completions:
+	sh-completion/gen-completions bash >sh-completion/ansifilter.bash
+	sh-completion/gen-completions fish >sh-completion/ansifilter.fish
+	sh-completion/gen-completions zsh >sh-completion/ansifilter.zsh
 
 help:
 	@echo "This makefile offers the following options:"
