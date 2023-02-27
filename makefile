@@ -117,6 +117,7 @@ help:
 	@echo "(all)            Compile."
 	@echo "all-gui          Compile Qt GUI (requires Qt 5.x)"
 	@echo "install*         Copy all data files to ${data_dir}."
+	@echo "completions      Generate shell completion files."
 	@echo "clean            Remove object files and binary."
 	@echo "uninstall*       Remove ansifilter files from system."
 	@echo

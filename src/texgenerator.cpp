@@ -2,7 +2,7 @@
                      texgenerator.cpp  -  description
                              -------------------
 
-    copyright            : (C) 2008-2015 by Andre Simon
+    copyright            : (C) 2008-2023 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -63,7 +63,7 @@ string TeXGenerator::getOpenTag()
               << elementStyle.getFgColour().getBlue(TEX)
               << " 0}";
 
-    return "{" + fmtStream.str();       
+    return "{" + fmtStream.str();
 }
 
 string TeXGenerator::getCloseTag()
@@ -98,10 +98,10 @@ string TeXGenerator::getFooter()
 {
     string footer;
     footer = "\n}\n\\bye\n";
-    
+
     if (!omitVersionInfo)
         footer += getGeneratorComment();
-    
+
     return footer;
 }
 
@@ -242,7 +242,7 @@ void TeXGenerator::insertLineNumber ()
         ostringstream lnum;
         lnum << setw ( 5 ) << right;
         if( numberCurrentLine ) {
-            if (lineNumber>1) 
+            if (lineNumber>1)
               *out << getCloseTag();
             lnum << lineNumber;
             *out <<"{\\textColor{1 1 1 0} "<<lnum.str()<<spacer<<"}";

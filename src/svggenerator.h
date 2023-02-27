@@ -2,7 +2,7 @@
                     SVGGenerator.h  -  description
                              -------------------
     begin                : Mo 23.06.2008
-    copyright            : (C) 2019 by Andre Simon
+    copyright            : (C) 2019-2023 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -58,7 +58,7 @@ protected:
     string getGeneratorComment();
 
     void insertLineNumber ();
-    
+
     bool printDynamicStyleFile ( const string &outPath );
 
 
@@ -78,7 +78,7 @@ private:
 
     /** \return escaped character*/
     virtual string maskCharacter(unsigned char );
-    
+
 };
 
 }

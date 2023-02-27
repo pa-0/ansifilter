@@ -1,6 +1,6 @@
 = ANSIFILTER MANUAL
 André Simon
-v2.18, January 2023
+v2.19, February 2023
 
 
 OSI Certified Open Source Software
@@ -162,5 +162,3 @@ http://www.andre-simon.de/
 Git project with Git repository, bug tracker:
 https://gitlab.com/saalen/ansifilter
 
-sf.net project with SVN repository, download mirror, bug tracker, help forum:
-http://sourceforge.net/projects/ansifilter/

@@ -2,7 +2,7 @@
                           rtfcode.h  -  description
                              -------------------
 
-    copyright            : (C) 2007 by Andre Simon
+    copyright            : (C) 2007-2023 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
