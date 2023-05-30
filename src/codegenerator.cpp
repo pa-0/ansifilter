@@ -1274,7 +1274,7 @@ void CodeGenerator::processInput()
 
                   // fix K sequences (iterm2/grep)
                   isKSeq =  line[seqEnd]=='K' && !ignClearSeq ;
-                  isGrepOutput = isKSeq && isascii(line[seqEnd+1]) && line[seqEnd+1] !=13 && line[seqEnd+1] != 27;
+                  isGrepOutput = isKSeq && line.length() > (seqEnd + 1) && isascii(line[seqEnd+1]) && line[seqEnd+1] !=13 && line[seqEnd+1] != 27;
 
                   if (   line[seqEnd]=='s' || line[seqEnd]=='u'
                     || (isKSeq && !isGrepOutput) ){
@@ -1302,7 +1302,7 @@ void CodeGenerator::processInput()
                         ++seqEnd;
                     }
 
-                    if (line[seqEnd+1]=='A')
+                    if (line.length() > (seqEnd + 1) && line[seqEnd+1]=='A')
                         seqEnd++;
 
                     i=seqEnd+1;
@@ -1311,7 +1311,7 @@ void CodeGenerator::processInput()
 
                 ) ) // DECSC seq
                 {
-                    if (line[seqEnd+1]==0x1b)
+                    if (line.length() > (seqEnd + 1) && line[seqEnd+1]==0x1b)
                         ++i;
                 }
               }
