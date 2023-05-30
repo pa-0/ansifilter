@@ -321,6 +321,7 @@ void MyDialog::on_pbSaveAs_clicked()
     QString title(QFileInfo(outFileName).fileName());
 
     unique_ptr<ansifilter::CodeGenerator> generator(ansifilter::CodeGenerator::getInstance(getOutputType()));
+    generator->setDefaultForegroundColor();
     generator->setTitle( (dlg.leTitle->text().isEmpty()? title : dlg.leTitle->text()).toStdString());
     generator->setEncoding(dlg.comboEncoding->currentText().toStdString());
     generator->setFragmentCode(dlg.cbFragment->isChecked());
@@ -405,6 +406,7 @@ void MyDialog::on_pbClipboard_clicked()
     }
 
     unique_ptr<ansifilter::CodeGenerator> generator(ansifilter::CodeGenerator::getInstance(ansifilter::TEXT));
+    generator->setDefaultForegroundColor();
     generator->setPreformatting ( ansifilter::WRAP_SIMPLE, static_cast<unsigned int>(dlg.spinBoxWrap->value()));
     generator->setIgnoreClearSeq(dlg.cbIgnClearSeq->isChecked());
     generator->setIgnoreCSISeq(dlg.cbIgnCSISeq->isChecked());
@@ -442,7 +444,7 @@ void MyDialog::showFile()
     dlg.lblInFilePath->setText(inputFileName);
 
     unique_ptr<ansifilter::CodeGenerator> generator(ansifilter::CodeGenerator::getInstance(ansifilter::HTML));
-
+    generator->setDefaultForegroundColor();
     generator->setEncoding(dlg.comboEncoding->currentText().toStdString());
     generator->setFragmentCode(false);
     generator->setPlainOutput(dlg.cbIgnoreSequences->isChecked());
@@ -493,7 +495,7 @@ void MyDialog::on_pbAbout_clicked()
     QMessageBox::about(this,
                        "ANSIFilter Information",
                        QString("ANSIFilter GUI %1\n"
-                       "(c) 2007-2021 Andre Simon\n\n"
+                       "(c) 2007-2023 Andre Simon\n\n"
                        "Built with Qt version %2\n\n"
                        "Released under the terms of the GNU GPL license.\n\n"
                        "%3\n"

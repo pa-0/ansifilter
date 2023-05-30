@@ -2,7 +2,7 @@
                           cmdlineoptions.h  -  description
                              -------------------
     begin                : Sun Oct 13 2007
-    copyright            : (C) 2007-2018 by Andre Simon
+    copyright            : (C) 2007-2023 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -70,7 +70,7 @@ public:
 
     /** \return path to color map*/
     string getMapPath() const;
-    
+
     /** \return True if version information should be printed*/
     bool printVersion() const;
 
@@ -106,32 +106,34 @@ public:
 
     /** \return True if input should be treated as codepage 437 ASCII art */
     bool parseCP437() const;
-    
+
     /** \return True if input should be treated as BIN ASCII art */
     bool parseAsciiBin() const;
 
     /** \return True if input should be treated as Tundra ASCII art */
     bool parseAsciiTundra() const;
-   
+
      /** \return True if output should not be terminated with carriage return */
     bool omitTrailingCR() const;
 
     /** \return True if output should not contain a version info comment */
     bool omitVersionInfo() const;
-    
+
     /** \return True if clear sequences (ESC K) should be ignored */
     bool ignoreClearSeq() const;
 
         /** \return True if CSI sequences should be ignored */
     bool ignoreCSISeq() const;
-    
+
     /** \return True if output should contain dynamic style classes instead of inline styles */
     bool applyDynStyles() const;
-    
+
     /** \return True if dynamic styles should be saved to a file */
     bool genDynStyles() const;
-    
+
     bool addFunnyAnchors() const;
+
+    bool omitDefaultForegroundColor() const;
 
     /** \return Document title */
     string getDocumentTitle() const ;
@@ -178,10 +180,11 @@ private:
     bool opt_omit_version_info;
     bool opt_ignoreClear;
     bool opt_ignoreCSI;
-    
+
     bool opt_applyDynStyles;
     bool opt_genDynStyles;
     bool opt_funny_anchors;
+    bool opt_omit_default_fg_color;
 
     // name of single output file
     string outFilename;
@@ -198,7 +201,7 @@ private:
     int wrapLineLen;
     int asciiArtWidth;
     int asciiArtHeight;
-    
+
     off_t maxFileSize;
 
     /** list of all input file names */

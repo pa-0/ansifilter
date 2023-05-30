@@ -83,6 +83,7 @@ void ANSIFilterApp::printHelp()
     cout << "  -s, --font-size=<fs>   Set HTML/RTF/SVG font size\n";
     cout << "  -p, --plain            Ignore ANSI formatting information\n";
     cout << "  -w, --wrap=<len>       Wrap long lines\n";
+    cout << "  -g, --no-default-fg    Omit default foreground color\n";
     cout << "      --no-trailing-nl   Omit trailing newline\n";
     cout << "      --no-version-info  Omit version info comment\n";
     cout << "      --wrap-no-numbers  Omit line numbers of wrapped lines (assumes -l)\n";
@@ -137,6 +138,10 @@ int ANSIFilterApp::run( const int argc, const char *argv[] )
     string inFileName, outFilePath;
     string mapPath = options.getMapPath();
     bool failure=false;
+
+    if (!options.omitDefaultForegroundColor()) {
+        generator->setDefaultForegroundColor();
+    }
 
     if (!generator->setColorMap(mapPath)){
         std::cerr <<"could not read map file: " << mapPath << "\n";

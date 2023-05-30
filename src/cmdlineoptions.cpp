@@ -33,8 +33,8 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include "platform_fs.h"
 #include "stringtools.h"
 
-using namespace std;  
-    
+using namespace std;
+
 const Arg_parser::Option options[] = {
     { 'a', "anchors",    Arg_parser::maybe },
     { 'd', "doc-title",  Arg_parser::yes },
@@ -75,7 +75,8 @@ const Arg_parser::Option options[] = {
     { 'S', "svg",        Arg_parser::no  },
     { 'Q', "width",      Arg_parser::yes  },
     { 'E', "height",     Arg_parser::yes  },
-    { 'x', "max-size",     Arg_parser::yes  },
+    { 'x', "max-size",   Arg_parser::yes  },
+    { 'g', "no-default-fg", Arg_parser::no  },
 
     {  0,  0,           Arg_parser::no  }
 };
@@ -100,6 +101,7 @@ CmdLineOptions::CmdLineOptions( const int argc, const char *argv[] ):
     opt_applyDynStyles(false),
     opt_genDynStyles(false),
     opt_funny_anchors(false),
+    opt_omit_default_fg_color(false),
     encodingName("ISO-8859-1"),
     font("Courier New"),
     fontSize("10pt"),
@@ -118,13 +120,13 @@ CmdLineOptions::CmdLineOptions( const int argc, const char *argv[] ):
         std::vector<char*> options;
         while (ss >> arg)
         {
-            ls.push_back(arg); 
+            ls.push_back(arg);
             options.push_back(const_cast<char*>(ls.back().c_str()));
         }
-        options.push_back(0); 
+        options.push_back(0);
         parseRuntimeOptions(options.size()-1, (const char**) &options[0], false);
     }
-    
+
     parseRuntimeOptions(argc, argv);
 }
 
@@ -144,29 +146,7 @@ void CmdLineOptions::parseRuntimeOptions( const int argc, const char *argv[], bo
         const std::string & arg = parser.argument( argind );
         if( !code ) break;
         switch( code ) {
-        /* tbd
-        case 'O':
-        			{
-        			const string tmp = StringTools::change_case ( arg );
-        			if ( tmp == "xhtml" )
-        				outputType = highlight::XHTML;
-        			else if ( tmp == "tex" )
-        				outputType = highlight::TEX;
-        			else if ( tmp == "latex" )
-        				outputType = highlight::LATEX;
-        			else if ( tmp == "rtf" )
-        				outputType = highlight::RTF;
-        			else if ( tmp == "svg" )
-        				outputType = highlight::SVG;
-        			else if ( tmp == "bbcode" )
-        				outputType = highlight::BBCODE;
-        			else if ( tmp == "odt" )
-        				outputType = highlight::ODTFLAT;
-        			else
-        				outputType = highlight::HTML;
-        			}
-        			break;
-        */
+
         case 'a':
             opt_anchors = true;
             if ( arg=="self" ) opt_funny_anchors=true;
@@ -278,13 +258,16 @@ void CmdLineOptions::parseRuntimeOptions( const int argc, const char *argv[], bo
         case 'y':
             opt_applyDynStyles=true;
             break;
+        case 'g':
+            opt_omit_default_fg_color = true;
+            break;
         case 'Q':
             width=arg;
             break;
         case 'E':
             height=arg;
             break;
-        
+
         case 'x': {
             StringTools::str2num<off_t> ( maxFileSize, arg, std::dec );
             switch (arg[arg.size()-1]) {
@@ -392,10 +375,10 @@ bool CmdLineOptions::ignoreCSISeq() const {
 }
 
 int CmdLineOptions::getAsciiArtWidth() const {
-  return asciiArtWidth;   
+  return asciiArtWidth;
 }
 int CmdLineOptions::getAsciiArtHeight() const{
-  return asciiArtHeight;   
+  return asciiArtHeight;
 }
 
 string CmdLineOptions::getOutFileSuffix()const
@@ -416,7 +399,7 @@ string CmdLineOptions::getOutFileSuffix()const
         return ".bbcode";
     case ansifilter::SVG:
         return ".svg";
-    
+
     default:
         return ".txt";
     }
@@ -482,8 +465,11 @@ bool CmdLineOptions::omitVersionInfo() const
 bool CmdLineOptions::applyDynStyles() const {
     return opt_applyDynStyles;
 }
-    
-    
+bool CmdLineOptions::omitDefaultForegroundColor() const
+{
+    return opt_omit_default_fg_color;
+}
+
 string CmdLineOptions::getDocumentTitle() const
 {
     return docTitle;
@@ -523,4 +509,3 @@ off_t CmdLineOptions::getMaxFileSize() const
 {
     return maxFileSize;
 }
-

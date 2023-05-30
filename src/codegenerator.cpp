@@ -122,12 +122,15 @@ CodeGenerator::CodeGenerator(ansifilter::OutputType type)
      asciiArtHeight(150),
      lineWrapLen(0)
 {
-    elementStyle.setFgColour(rgb2html(workingPalette[0]));
 }
 
 CodeGenerator::~CodeGenerator()
 {}
 
+void CodeGenerator::setDefaultForegroundColor()
+{
+    elementStyle.setFgColour(rgb2html(workingPalette[0]));
+}
 
 void CodeGenerator::setShowLineNumbers(bool flag)
 {

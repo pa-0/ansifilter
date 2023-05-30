@@ -189,6 +189,11 @@ public:
     */
     bool setColorMap(const string& mapPath);
 
+    /**
+     Initialize default foreground color
+    */
+    void setDefaultForegroundColor();
+
     /** tell parser to omit document header and footer
        \param  flag true if output should be fragmented
     */

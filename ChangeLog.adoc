@@ -2,6 +2,12 @@
 
 === ansifilter 2.19
 
+30.05.2023
+
+ - CLI: added `--no-default-fg` option to omit default foreground color (https://gitlab.com/saalen/ansifilter/-/issues/37)
+
+=== ansifilter 2.19
+
 23.02.2023
 
  - added stdin/stdio default stream hints in `--help` (https://gitlab.com/saalen/ansifilter/-/issues/34)
@@ -258,7 +264,7 @@
 16.04.2014
 
  - added support for Erase Line, Save and Restore Cursor sequences
-  (thanks to Kovács Zoltán)
+  (thanks to Kovï¿½cs Zoltï¿½n)
 
 
 === ansifilter 1.7

@@ -87,8 +87,8 @@ void  ElementStyle::imageMode(bool negative)
 
 void ElementStyle::setReset(bool b)
 {
-  
-  
+
+
     reset=b;
     if (reset) {
       setFgColour("#000000");

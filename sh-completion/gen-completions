@@ -91,6 +91,10 @@ parser:option "-w --wrap"
 
 parser:flag "--no-trailing-nl"
    :description "Omit trailing newline"
+
+parser:flag "-g --no-default-fg"
+   :description "Omit default foreground color"
+
 parser:flag "--no-version-info"
    :description "Omit version info comment"
 parser:flag "--wrap-no-numbers"
