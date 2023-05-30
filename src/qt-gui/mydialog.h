@@ -37,7 +37,7 @@ class MyDialog : public QDialog
 public:
                 Ui::Dialog dlg;
                 //The same constructor that we used last time with QDialog default parameters
-                MyDialog(QWidget * parent = 0, Qt::WindowFlags f = 0);
+                MyDialog(QWidget * parent = 0, Qt::WindowFlags f = Qt::Window);
 
 
                 void setInputFileName(const char* fName) {
@@ -46,7 +46,7 @@ public:
                 }
 
                 virtual ~MyDialog() {}
-                
+
 protected:
                 void closeEvent(QCloseEvent *event);
 
@@ -93,4 +93,3 @@ public slots:
 };
 
 #endif
-
