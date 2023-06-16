@@ -1,9 +1,10 @@
 = Ansifilter ChangeLog
 
-=== ansifilter 2.19
+=== ansifilter 2.20
 
 30.05.2023
 
+ - fixed invalid array access (https://gitlab.com/saalen/ansifilter/-/issues/35)
  - CLI: added `--no-default-fg` option to omit default foreground color (https://gitlab.com/saalen/ansifilter/-/issues/37)
 
 === ansifilter 2.19
