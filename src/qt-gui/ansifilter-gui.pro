@@ -28,3 +28,5 @@ win32 {
 
 macx-clang:ICON = $${PWD}/ansifilter.icns
 macx:ICON = $${PWD}/ansifilter.icns
+
+CONFIG += c++14
