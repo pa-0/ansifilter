@@ -92,7 +92,7 @@ public:
     /** \return True if formatting infotmation should not be outputted */
     bool plainOutput() const;
 
-    /** \return True if input files should be raed after EOF occoured */
+    /** \return True if input files should be read after EOF occurred */
     bool ignoreInputEOF() const;
 
     /** \return True if line numbers should be printed */

@@ -649,7 +649,7 @@ void CodeGenerator::parseCodePage437Seq(string line, size_t begin, size_t end){
       curX++;
     }
 
-    //handle coloumn overflow
+    //handle column overflow
     if (curX>asciiArtWidth && curY<asciiArtHeight){
       curX-=asciiArtWidth;
       curY++;
@@ -1105,7 +1105,7 @@ void CodeGenerator::processInput()
     numberCurrentLine = true;
 
     if (eof) {
-      // imitate tail bahaviour, continue to read after EOF
+      // imitate tail behaviour, continue to read after EOF
       if (readAfterEOF) {
         out->flush();
         in->clear();

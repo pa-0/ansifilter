@@ -463,7 +463,7 @@ private:
     virtual string getCloseTag() = 0; ///< returns closing formatting sequence
 
     bool ignoreFormatting; ///< ignore color and font face information
-    bool readAfterEOF;     ///< continue reading after EOF occoured
+    bool readAfterEOF;     ///< continue reading after EOF occurred
     bool omitTrailingCR;   ///< do not print EOL at the end of output
     bool ignClearSeq;      ///< ignore clear sequence ESC K
     bool ignCSISeq;       ///< ignore CSIs (may interfere with UTF-8 input)

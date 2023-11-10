@@ -116,11 +116,11 @@ private:
 
     /** @param styleNumber number of current style
         @param elem associated element style
-        @return RTF formatting seqence (colour index + bold + italic)*/
+        @return RTF formatting sequence (colour index + bold + italic)*/
     string getOpenTag();
 
     /** @param elem associated element style
-        @return RTF formatting sequnce to close element formatting */
+        @return RTF formatting sequence to close element formatting */
     string getCloseTag();
 
 

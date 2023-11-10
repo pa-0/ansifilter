@@ -53,7 +53,7 @@ string upperCase(const string &s);
 */
 string trimRight(const string &value);
 
-/** \param s String, containing a opening and a closing paranthesis
+/** \param s String, containing a opening and a closing parenthesis
      \return value between "(", ")" */
 string getParantheseVal(const string &s);
 
