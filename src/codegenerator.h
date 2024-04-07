@@ -40,6 +40,25 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include "enums.h"
 #include "stringtools.h"
 
+
+using std::string;
+using std::vector;
+using std::cin;
+using std::cout;
+using std::cerr;
+using std::istream;
+using std::ostream;
+using std::stringstream;
+using std::istringstream;
+using std::ostringstream;
+using std::ofstream;
+using std::ifstream;
+using std::ios;
+using std::right;
+using std::setw;
+using std::ios;
+
+
 /// The ansifilter namespace contains all classes and data structures needed for parsing input data.
 
 namespace ansifilter
@@ -469,9 +488,9 @@ private:
     bool ignCSISeq;       ///< ignore CSIs (may interfere with UTF-8 input)
 
     TDChar* termBuffer;
-    int curX, curY, memX, memY, maxY; ///< cursor position for Codepage 437 sequences
-    int asciiArtWidth;        ///< virtual console column count
-    int asciiArtHeight;       ///< virtual console line count
+    unsigned int curX, curY, memX, memY, maxY; ///< cursor position for Codepage 437 sequences
+    unsigned int asciiArtWidth;        ///< virtual console column count
+    unsigned int asciiArtHeight;       ///< virtual console line count
     unsigned int lineWrapLen; ///< max line length before wrapping
 
     ElementStyle memStyle;

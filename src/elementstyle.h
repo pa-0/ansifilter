@@ -28,7 +28,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "stylecolour.h"
 
-using namespace std;
+using std::string;
 
 namespace ansifilter
 {

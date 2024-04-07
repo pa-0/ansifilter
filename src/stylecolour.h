@@ -30,7 +30,9 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <string>
 
-using namespace std;
+using std::string;
+using std::ostringstream;
+using std::istringstream;
 
 namespace ansifilter
 {
@@ -83,10 +85,10 @@ public:
     /**  @param type Output type
          @return Red value in color representation according to output type */
     const string getRed(OutputType type) const;
-    
+
     /**  @param type Output type
          @return Green value in color representation according to output type */
-    
+
     const string getGreen(OutputType type) const;
     /**  @param type Output type
          @return Blue value in color representation according to output type */

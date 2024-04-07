@@ -26,7 +26,6 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <sys/stat.h>
 
-using namespace std;
 
 namespace Platform {
 
@@ -39,12 +38,12 @@ namespace Platform {
 //-D_FILE_OFFSET_BITS=64
 //268435456 256 MB
 
-off_t fileSize(const string& fName) {
+off_t fileSize(const std::string& fName) {
     struct stat fileInfo;
     if(stat(fName.c_str(), &fileInfo) != 0) {
         return 0;
     }
-    return fileInfo.st_size;   
+    return fileInfo.st_size;
 }
 
 }

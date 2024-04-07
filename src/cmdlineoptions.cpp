@@ -2,7 +2,7 @@
                           cmdlineoptions.cpp  -  description
                              -------------------
     begin                : Sun Oct 13 2007
-    copyright            : (C) 2007-2020 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -33,7 +33,6 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include "platform_fs.h"
 #include "stringtools.h"
 
-using namespace std;
 
 const Arg_parser::Option options[] = {
     { 'a', "anchors",    Arg_parser::maybe },

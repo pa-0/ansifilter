@@ -30,6 +30,8 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include "ui_ansifilter.h"
 #include "codegenerator.h"
 
+using std::string;
+using std::unique_ptr;
 
 class MyDialog : public QDialog
 {

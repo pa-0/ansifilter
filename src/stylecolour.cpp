@@ -31,7 +31,6 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <sstream>
 #include <cmath>
 
-using std::string;
 
 namespace ansifilter
 {

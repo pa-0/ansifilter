@@ -34,8 +34,11 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 #include "enums.h"
 
-
-using namespace std;
+using std::string;
+using std::vector;
+using std::cin;
+using std::cerr;
+using std::endl;
 
 /// handle command line options
 

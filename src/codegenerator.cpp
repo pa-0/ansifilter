@@ -713,9 +713,9 @@ void CodeGenerator::insertLineNumber ()
 
 void CodeGenerator::printTermBuffer() {
 
-    for (int y=0;y<=maxY;y++) {
+    for (unsigned int y=0;y<=maxY;y++) {
 
-        for (int x=0;x<asciiArtWidth;x++) {
+        for (unsigned int x=0;x<asciiArtWidth;x++) {
             if (termBuffer[x + y* asciiArtWidth].c=='\r') {
                 break;
             }
@@ -993,7 +993,7 @@ void CodeGenerator::allocateTermBuffer(){
   if (termBuffer) delete [] termBuffer;
 
   termBuffer = new TDChar[asciiArtWidth*asciiArtHeight];
-  for (int i=0; i<asciiArtWidth*asciiArtHeight; i++){
+  for (unsigned int i=0; i<asciiArtWidth*asciiArtHeight; i++){
     termBuffer[i].c=0;
   }
 }

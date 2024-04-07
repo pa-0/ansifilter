@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ansifilter.ui'
 **
-** Created by: Qt User Interface Compiler version 6.5.0
+** Created by: Qt User Interface Compiler version 5.15.13
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -100,7 +100,7 @@ public:
     void setupUi(QDialog *Dialog)
     {
         if (Dialog->objectName().isEmpty())
-            Dialog->setObjectName("Dialog");
+            Dialog->setObjectName(QString::fromUtf8("Dialog"));
         Dialog->setWindowModality(Qt::NonModal);
         Dialog->resize(784, 791);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -113,9 +113,9 @@ public:
         icon.addFile(QString::fromUtf8(":/ansifilter.xpm"), QSize(), QIcon::Normal, QIcon::Off);
         Dialog->setWindowIcon(icon);
         horizontalLayout_4 = new QHBoxLayout(Dialog);
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         groupBox = new QGroupBox(Dialog);
-        groupBox->setObjectName("groupBox");
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
         QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -123,11 +123,11 @@ public:
         groupBox->setSizePolicy(sizePolicy1);
         groupBox->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         verticalLayout_2 = new QVBoxLayout(groupBox);
-        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         gridLayout_4 = new QGridLayout();
-        gridLayout_4->setObjectName("gridLayout_4");
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         pbFileOpen = new QPushButton(groupBox);
-        pbFileOpen->setObjectName("pbFileOpen");
+        pbFileOpen->setObjectName(QString::fromUtf8("pbFileOpen"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -141,7 +141,7 @@ public:
         gridLayout_4->addItem(horizontalSpacer_5, 0, 1, 1, 1);
 
         pbSaveAs = new QPushButton(groupBox);
-        pbSaveAs->setObjectName("pbSaveAs");
+        pbSaveAs->setObjectName(QString::fromUtf8("pbSaveAs"));
         QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -151,7 +151,7 @@ public:
         gridLayout_4->addWidget(pbSaveAs, 1, 0, 1, 1);
 
         pbClipboard = new QPushButton(groupBox);
-        pbClipboard->setObjectName("pbClipboard");
+        pbClipboard->setObjectName(QString::fromUtf8("pbClipboard"));
         sizePolicy3.setHeightForWidth(pbClipboard->sizePolicy().hasHeightForWidth());
         pbClipboard->setSizePolicy(sizePolicy3);
 
@@ -161,7 +161,7 @@ public:
         verticalLayout_2->addLayout(gridLayout_4);
 
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName("gridLayout");
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         horizontalSpacer_4 = new QSpacerItem(13, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         gridLayout->addItem(horizontalSpacer_4, 1, 0, 1, 1);
@@ -179,7 +179,7 @@ public:
         gridLayout->addItem(horizontalSpacer_2, 1, 2, 1, 1);
 
         lblDrop = new QLabel(groupBox);
-        lblDrop->setObjectName("lblDrop");
+        lblDrop->setObjectName(QString::fromUtf8("lblDrop"));
         lblDrop->setEnabled(false);
         lblDrop->setMaximumSize(QSize(48, 48));
         lblDrop->setPixmap(QPixmap(QString::fromUtf8(":/Actions-drop-icon.png")));
@@ -191,9 +191,9 @@ public:
         verticalLayout_2->addLayout(gridLayout);
 
         horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         label_4 = new QLabel(groupBox);
-        label_4->setObjectName("label_4");
+        label_4->setObjectName(QString::fromUtf8("label_4"));
 
         horizontalLayout_6->addWidget(label_4);
 
@@ -206,7 +206,7 @@ public:
         comboFormat->addItem(QString());
         comboFormat->addItem(QString());
         comboFormat->addItem(QString());
-        comboFormat->setObjectName("comboFormat");
+        comboFormat->setObjectName(QString::fromUtf8("comboFormat"));
         comboFormat->setEnabled(true);
 
         horizontalLayout_6->addWidget(comboFormat);
@@ -215,9 +215,9 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_6);
 
         gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName("gridLayout_2");
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         cbIgnoreSequences = new QCheckBox(groupBox);
-        cbIgnoreSequences->setObjectName("cbIgnoreSequences");
+        cbIgnoreSequences->setObjectName(QString::fromUtf8("cbIgnoreSequences"));
         QSizePolicy sizePolicy4(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
@@ -227,14 +227,14 @@ public:
         gridLayout_2->addWidget(cbIgnoreSequences, 0, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         lblSvgDim = new QLabel(groupBox);
-        lblSvgDim->setObjectName("lblSvgDim");
+        lblSvgDim->setObjectName(QString::fromUtf8("lblSvgDim"));
 
         horizontalLayout_2->addWidget(lblSvgDim);
 
         leSvgWidth = new QLineEdit(groupBox);
-        leSvgWidth->setObjectName("leSvgWidth");
+        leSvgWidth->setObjectName(QString::fromUtf8("leSvgWidth"));
         QSizePolicy sizePolicy5(QSizePolicy::Expanding, QSizePolicy::Minimum);
         sizePolicy5.setHorizontalStretch(0);
         sizePolicy5.setVerticalStretch(0);
@@ -245,7 +245,7 @@ public:
         horizontalLayout_2->addWidget(leSvgWidth);
 
         leSvgHeight = new QLineEdit(groupBox);
-        leSvgHeight->setObjectName("leSvgHeight");
+        leSvgHeight->setObjectName(QString::fromUtf8("leSvgHeight"));
         sizePolicy5.setHeightForWidth(leSvgHeight->sizePolicy().hasHeightForWidth());
         leSvgHeight->setSizePolicy(sizePolicy5);
         leSvgHeight->setMaximumSize(QSize(60, 16777215));
@@ -256,30 +256,30 @@ public:
         gridLayout_2->addLayout(horizontalLayout_2, 3, 1, 1, 1);
 
         cbOmitVersion = new QCheckBox(groupBox);
-        cbOmitVersion->setObjectName("cbOmitVersion");
+        cbOmitVersion->setObjectName(QString::fromUtf8("cbOmitVersion"));
 
         gridLayout_2->addWidget(cbOmitVersion, 1, 0, 1, 1);
 
         cbIgnClearSeq = new QCheckBox(groupBox);
-        cbIgnClearSeq->setObjectName("cbIgnClearSeq");
+        cbIgnClearSeq->setObjectName(QString::fromUtf8("cbIgnClearSeq"));
         cbIgnClearSeq->setToolTipDuration(-5);
 
         gridLayout_2->addWidget(cbIgnClearSeq, 1, 1, 1, 1);
 
         cbFragment = new QCheckBox(groupBox);
-        cbFragment->setObjectName("cbFragment");
+        cbFragment->setObjectName(QString::fromUtf8("cbFragment"));
         sizePolicy4.setHeightForWidth(cbFragment->sizePolicy().hasHeightForWidth());
         cbFragment->setSizePolicy(sizePolicy4);
 
         gridLayout_2->addWidget(cbFragment, 0, 1, 1, 1);
 
         cbIgnCSISeq = new QCheckBox(groupBox);
-        cbIgnCSISeq->setObjectName("cbIgnCSISeq");
+        cbIgnCSISeq->setObjectName(QString::fromUtf8("cbIgnCSISeq"));
 
         gridLayout_2->addWidget(cbIgnCSISeq, 2, 1, 1, 1);
 
         cbDeriveStyles = new QCheckBox(groupBox);
-        cbDeriveStyles->setObjectName("cbDeriveStyles");
+        cbDeriveStyles->setObjectName(QString::fromUtf8("cbDeriveStyles"));
 
         gridLayout_2->addWidget(cbDeriveStyles, 2, 0, 1, 1);
 
@@ -291,17 +291,17 @@ public:
         verticalLayout_2->addItem(verticalSpacer_4);
 
         gbAsciiArt = new QGroupBox(groupBox);
-        gbAsciiArt->setObjectName("gbAsciiArt");
+        gbAsciiArt->setObjectName(QString::fromUtf8("gbAsciiArt"));
         gbAsciiArt->setEnabled(true);
         sizePolicy3.setHeightForWidth(gbAsciiArt->sizePolicy().hasHeightForWidth());
         gbAsciiArt->setSizePolicy(sizePolicy3);
         gbAsciiArt->setFlat(false);
         gridLayout_5 = new QGridLayout(gbAsciiArt);
-        gridLayout_5->setObjectName("gridLayout_5");
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         cbParseAsciiArt = new QCheckBox(gbAsciiArt);
-        cbParseAsciiArt->setObjectName("cbParseAsciiArt");
+        cbParseAsciiArt->setObjectName(QString::fromUtf8("cbParseAsciiArt"));
 
         horizontalLayout_3->addWidget(cbParseAsciiArt);
 
@@ -309,7 +309,7 @@ public:
         comboAnsiFormat->addItem(QString());
         comboAnsiFormat->addItem(QString());
         comboAnsiFormat->addItem(QString());
-        comboAnsiFormat->setObjectName("comboAnsiFormat");
+        comboAnsiFormat->setObjectName(QString::fromUtf8("comboAnsiFormat"));
         comboAnsiFormat->setEnabled(false);
         comboAnsiFormat->setEditable(false);
         comboAnsiFormat->setMaxVisibleItems(3);
@@ -321,20 +321,20 @@ public:
         gridLayout_5->addLayout(horizontalLayout_3, 0, 0, 1, 1);
 
         artSizeFrame = new QFrame(gbAsciiArt);
-        artSizeFrame->setObjectName("artSizeFrame");
+        artSizeFrame->setObjectName(QString::fromUtf8("artSizeFrame"));
         artSizeFrame->setEnabled(false);
         artSizeFrame->setFrameShape(QFrame::StyledPanel);
         artSizeFrame->setFrameShadow(QFrame::Raised);
         horizontalLayout_7 = new QHBoxLayout(artSizeFrame);
-        horizontalLayout_7->setObjectName("horizontalLayout_7");
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
         lblWidth = new QLabel(artSizeFrame);
-        lblWidth->setObjectName("lblWidth");
+        lblWidth->setObjectName(QString::fromUtf8("lblWidth"));
         lblWidth->setEnabled(false);
 
         horizontalLayout_7->addWidget(lblWidth);
 
         sbWidth = new QSpinBox(artSizeFrame);
-        sbWidth->setObjectName("sbWidth");
+        sbWidth->setObjectName(QString::fromUtf8("sbWidth"));
         sbWidth->setEnabled(false);
         sbWidth->setMinimum(60);
         sbWidth->setMaximum(320);
@@ -348,13 +348,13 @@ public:
         horizontalLayout_7->addItem(horizontalSpacer);
 
         lblHeight = new QLabel(artSizeFrame);
-        lblHeight->setObjectName("lblHeight");
+        lblHeight->setObjectName(QString::fromUtf8("lblHeight"));
         lblHeight->setEnabled(false);
 
         horizontalLayout_7->addWidget(lblHeight);
 
         sbHeight = new QSpinBox(artSizeFrame);
-        sbHeight->setObjectName("sbHeight");
+        sbHeight->setObjectName(QString::fromUtf8("sbHeight"));
         sbHeight->setEnabled(false);
         sbHeight->setMinimum(80);
         sbHeight->setMaximum(500);
@@ -370,9 +370,9 @@ public:
         verticalLayout_2->addWidget(gbAsciiArt);
 
         gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName("gridLayout_3");
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         lblTitle = new QLabel(groupBox);
-        lblTitle->setObjectName("lblTitle");
+        lblTitle->setObjectName(QString::fromUtf8("lblTitle"));
         QSizePolicy sizePolicy6(QSizePolicy::Maximum, QSizePolicy::Minimum);
         sizePolicy6.setHorizontalStretch(0);
         sizePolicy6.setVerticalStretch(0);
@@ -382,7 +382,7 @@ public:
         gridLayout_3->addWidget(lblTitle, 0, 0, 1, 1);
 
         leTitle = new QLineEdit(groupBox);
-        leTitle->setObjectName("leTitle");
+        leTitle->setObjectName(QString::fromUtf8("leTitle"));
         QSizePolicy sizePolicy7(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy7.setHorizontalStretch(0);
         sizePolicy7.setVerticalStretch(0);
@@ -392,17 +392,17 @@ public:
         gridLayout_3->addWidget(leTitle, 0, 1, 1, 2);
 
         lblStyleFile = new QLabel(groupBox);
-        lblStyleFile->setObjectName("lblStyleFile");
+        lblStyleFile->setObjectName(QString::fromUtf8("lblStyleFile"));
 
         gridLayout_3->addWidget(lblStyleFile, 1, 0, 1, 1);
 
         leStyleFile = new QLineEdit(groupBox);
-        leStyleFile->setObjectName("leStyleFile");
+        leStyleFile->setObjectName(QString::fromUtf8("leStyleFile"));
 
         gridLayout_3->addWidget(leStyleFile, 1, 1, 1, 2);
 
         lblEncoding = new QLabel(groupBox);
-        lblEncoding->setObjectName("lblEncoding");
+        lblEncoding->setObjectName(QString::fromUtf8("lblEncoding"));
         sizePolicy1.setHeightForWidth(lblEncoding->sizePolicy().hasHeightForWidth());
         lblEncoding->setSizePolicy(sizePolicy1);
 
@@ -423,7 +423,7 @@ public:
         comboEncoding->addItem(QString());
         comboEncoding->addItem(QString());
         comboEncoding->addItem(QString());
-        comboEncoding->setObjectName("comboEncoding");
+        comboEncoding->setObjectName(QString::fromUtf8("comboEncoding"));
         sizePolicy7.setHeightForWidth(comboEncoding->sizePolicy().hasHeightForWidth());
         comboEncoding->setSizePolicy(sizePolicy7);
         comboEncoding->setEditable(true);
@@ -431,19 +431,19 @@ public:
         gridLayout_3->addWidget(comboEncoding, 2, 2, 1, 1);
 
         label_3 = new QLabel(groupBox);
-        label_3->setObjectName("label_3");
+        label_3->setObjectName(QString::fromUtf8("label_3"));
 
         gridLayout_3->addWidget(label_3, 3, 0, 1, 1);
 
         spinBoxWrap = new QSpinBox(groupBox);
-        spinBoxWrap->setObjectName("spinBoxWrap");
+        spinBoxWrap->setObjectName(QString::fromUtf8("spinBoxWrap"));
 
         gridLayout_3->addWidget(spinBoxWrap, 3, 2, 1, 1);
 
         comboFont = new QFontComboBox(groupBox);
-        comboFont->setObjectName("comboFont");
+        comboFont->setObjectName(QString::fromUtf8("comboFont"));
         QFont font;
-        font.setFamilies({QString::fromUtf8("Liberation Mono")});
+        font.setFamily(QString::fromUtf8("Liberation Mono"));
         comboFont->setCurrentFont(font);
 
         gridLayout_3->addWidget(comboFont, 4, 0, 1, 2);
@@ -452,14 +452,14 @@ public:
         verticalLayout_2->addLayout(gridLayout_3);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_5 = new QLabel(groupBox);
-        label_5->setObjectName("label_5");
+        label_5->setObjectName(QString::fromUtf8("label_5"));
 
         horizontalLayout->addWidget(label_5);
 
         leColorMapPath = new QLineEdit(groupBox);
-        leColorMapPath->setObjectName("leColorMapPath");
+        leColorMapPath->setObjectName(QString::fromUtf8("leColorMapPath"));
         QSizePolicy sizePolicy8(QSizePolicy::Expanding, QSizePolicy::Maximum);
         sizePolicy8.setHorizontalStretch(0);
         sizePolicy8.setVerticalStretch(0);
@@ -469,7 +469,7 @@ public:
         horizontalLayout->addWidget(leColorMapPath);
 
         pbSelectMapFile = new QPushButton(groupBox);
-        pbSelectMapFile->setObjectName("pbSelectMapFile");
+        pbSelectMapFile->setObjectName(QString::fromUtf8("pbSelectMapFile"));
         QSizePolicy sizePolicy9(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy9.setHorizontalStretch(0);
         sizePolicy9.setVerticalStretch(0);
@@ -487,20 +487,21 @@ public:
         verticalLayout_2->addItem(verticalSpacer);
 
         horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         pbAbout = new QPushButton(groupBox);
-        pbAbout->setObjectName("pbAbout");
+        pbAbout->setObjectName(QString::fromUtf8("pbAbout"));
         sizePolicy3.setHeightForWidth(pbAbout->sizePolicy().hasHeightForWidth());
         pbAbout->setSizePolicy(sizePolicy3);
 
         horizontalLayout_5->addWidget(pbAbout);
 
         pbExit = new QPushButton(groupBox);
-        pbExit->setObjectName("pbExit");
+        pbExit->setObjectName(QString::fromUtf8("pbExit"));
         sizePolicy3.setHeightForWidth(pbExit->sizePolicy().hasHeightForWidth());
         pbExit->setSizePolicy(sizePolicy3);
         QFont font1;
         font1.setBold(true);
+        font1.setWeight(75);
         pbExit->setFont(font1);
 
         horizontalLayout_5->addWidget(pbExit);
@@ -512,21 +513,21 @@ public:
         horizontalLayout_4->addWidget(groupBox);
 
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         lblInFilePath = new QLabel(Dialog);
-        lblInFilePath->setObjectName("lblInFilePath");
+        lblInFilePath->setObjectName(QString::fromUtf8("lblInFilePath"));
 
         verticalLayout->addWidget(lblInFilePath);
 
         textEdit = new QTextEdit(Dialog);
-        textEdit->setObjectName("textEdit");
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
         QSizePolicy sizePolicy10(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy10.setHorizontalStretch(1);
         sizePolicy10.setVerticalStretch(1);
         sizePolicy10.setHeightForWidth(textEdit->sizePolicy().hasHeightForWidth());
         textEdit->setSizePolicy(sizePolicy10);
         QFont font2;
-        font2.setFamilies({QString::fromUtf8("Monospace")});
+        font2.setFamily(QString::fromUtf8("Monospace"));
         font2.setPointSize(10);
         textEdit->setFont(font2);
         textEdit->setAcceptDrops(false);
@@ -535,7 +536,7 @@ public:
         verticalLayout->addWidget(textEdit);
 
         cbWatchFile = new QCheckBox(Dialog);
-        cbWatchFile->setObjectName("cbWatchFile");
+        cbWatchFile->setObjectName(QString::fromUtf8("cbWatchFile"));
         cbWatchFile->setEnabled(false);
 
         verticalLayout->addWidget(cbWatchFile);
@@ -554,7 +555,7 @@ public:
         QWidget::setTabOrder(comboFont, textEdit);
 
         retranslateUi(Dialog);
-        QObject::connect(pbExit, &QPushButton::clicked, Dialog, qOverload<>(&QDialog::close));
+        QObject::connect(pbExit, SIGNAL(clicked()), Dialog, SLOT(close()));
 
         QMetaObject::connectSlotsByName(Dialog);
     } // setupUi

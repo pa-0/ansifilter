@@ -2,7 +2,7 @@
                           main.cpp  -  description
                              -------------------
 
-    copyright            : (C) 2007-2023 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
 
    Highlight is a universal source code to HTML converter. Syntax highlighting
@@ -33,13 +33,17 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include "codegenerator.h"
 #include "platform_fs.h"
 
-using namespace std;
+using std::cout;
+using std::cerr;
+
+using std::string;
+using std::unique_ptr;
 
 void ANSIFilterApp::printVersionInfo()
 {
     cout << "\n ansifilter version "
          << Info::getVersion()
-         << "\n Copyright (C) 2007-2023 Andre Simon <a dot simon at mailbox.org>"
+         << "\n Copyright (C) 2007-2024 Andre Simon <a dot simon at mailbox.org>"
          << "\n\n Argparser class"
          << "\n Copyright (C) 2006-2008 Antonio Diaz Diaz <ant_diaz at teleline.es>"
          << "\n\n This software is released under the terms of the GNU General "

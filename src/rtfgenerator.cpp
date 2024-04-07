@@ -147,7 +147,7 @@ void RtfGenerator::printBody()
 
     if (parseCP437/*||parseAsciiBin||parseAsciiTundra*/) *out << "}";
 
-    *out << "}"<<endl;
+    *out << "}"<<std::endl;
 }
 
 string RtfGenerator::getFooter()
@@ -188,7 +188,7 @@ string RtfGenerator::maskCharacter(unsigned char c)
 
     if (!utf8SeqLen){
       string m ( "\\u" );
-      m += to_string(utf16Char);
+      m += std::to_string(utf16Char);
       m += '?';
       utf16Char=0L;
       return m;
@@ -321,7 +321,7 @@ string RtfGenerator::unicodeFromHTML(const string &htmlEntity){
   std::istringstream iss(hexCode);
 
   iss >> std::hex >> x;
-  decCode += to_string(x);
+  decCode += std::to_string(x);
   decCode +="?";
 
   return decCode;

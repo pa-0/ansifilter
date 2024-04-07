@@ -30,7 +30,8 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 #include <sstream>
 
-using namespace std;
+using std::string;
+using std::vector;
 
 /// Contains methods for string manipulation
 

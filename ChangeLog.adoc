@@ -1,5 +1,12 @@
 = Ansifilter ChangeLog
 
+=== ansifilter 2.21
+
+14.03.2024
+
+ - removed `using namespace std;` in header files
+ - src/makefile: added -std=c++17 to enable modern C++ features
+
 === ansifilter 2.20
 
 30.05.2023

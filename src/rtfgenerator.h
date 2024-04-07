@@ -64,7 +64,7 @@ struct PageSize {
 };
 
 /** mapping of page size names and dimensions */
-typedef  map<string, struct PageSize> PagesizeMap;
+typedef  std::map<string, struct PageSize> PagesizeMap;
 
 class RtfGenerator : public ansifilter::CodeGenerator
 {

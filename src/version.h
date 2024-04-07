@@ -1,7 +1,7 @@
 /***************************************************************************
                           version.h  -  description
                              -------------------
-    copyright            : (C) 2007-2023 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -27,7 +27,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <string>
 
-#define ANSIFILTER_VERSION "2.20"
+#define ANSIFILTER_VERSION "2.21"
 
 #define ANSIFILTER_URL   "http://www.andre-simon.de/"
 #define ANSIFILTER_EMAIL "a.simon@mailbox.org"
