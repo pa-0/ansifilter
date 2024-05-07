@@ -2,10 +2,11 @@
 
 === ansifilter 2.21
 
-14.03.2024
+07.05.2024
 
  - removed `using namespace std;` in header files
- - src/makefile: added -std=c++17 to enable modern C++ features
+ - src/makefile: added `-std=c++17` to enable modern C++ features
+ - adapted TCL extension for C++17 compilation (https://gitlab.com/saalen/ansifilter/-/issues/42)
 
 === ansifilter 2.20
 

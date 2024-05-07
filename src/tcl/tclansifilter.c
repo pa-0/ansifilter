@@ -17,7 +17,7 @@ Execute_Escape_Cmd(ansifilter::OutputType type, Tcl_Interp *interp, int objc, Tc
 {
     int i;
     // XXX this creates and destroys new instances for every call!
-    auto_ptr<ansifilter::CodeGenerator> generator(ansifilter::CodeGenerator::getInstance(type));
+    std::unique_ptr<ansifilter::CodeGenerator> generator(ansifilter::CodeGenerator::getInstance(type));
     generator->setFragmentCode(1);     // -f
     generator->setPlainOutput(0);
     for (i = 1; i < objc; i++) {
