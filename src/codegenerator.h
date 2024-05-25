@@ -154,7 +154,7 @@ public:
 
     /**
       Delete Codegenerator instance (this is intended for SWIG integration,
-      in normal C++ code the result should be saved in an unique_ptr)
+      in normal C++ code the result should be saved in a unique_ptr)
       \param CodeGenerator* CodeGenerator instance
     */
     static void deleteInstance(CodeGenerator* inst)
