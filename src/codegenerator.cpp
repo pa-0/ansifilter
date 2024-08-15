@@ -50,7 +50,7 @@ namespace ansifilter
 
 CodeGenerator * CodeGenerator::getInstance(OutputType type)
 {
-    CodeGenerator* generator=NULL;
+    CodeGenerator* generator=nullptr;
     switch (type) {
     case TEXT:
         generator = new PlaintextGenerator();
@@ -84,8 +84,8 @@ CodeGenerator * CodeGenerator::getInstance(OutputType type)
 }
 
 CodeGenerator::CodeGenerator(ansifilter::OutputType type)
-    :in(NULL),
-     out(NULL),
+    :in(nullptr),
+     out(nullptr),
      tagIsOpen(false),
      encoding("none"),
      docTitle("Source file"),
@@ -112,7 +112,7 @@ CodeGenerator::CodeGenerator(ansifilter::OutputType type)
      omitTrailingCR(false),
      ignClearSeq(false),
      ignCSISeq(false),
-     termBuffer(NULL),
+     termBuffer(nullptr),
      curX(0),
      curY(0),
      memX(0),
@@ -125,7 +125,7 @@ CodeGenerator::CodeGenerator(ansifilter::OutputType type)
 }
 
 CodeGenerator::~CodeGenerator()
-{}
+= default;
 
 void CodeGenerator::setDefaultForegroundColor()
 {
@@ -264,11 +264,11 @@ ParseError CodeGenerator::generateFile (const string &inFileName,
 
     if (!outFileName.empty()) {
         delete out;
-        out=NULL;
+        out=nullptr;
     }
     if (!inFileName.empty()) {
         delete in;
-        in=NULL;
+        in=nullptr;
     }
     return error;
 }
@@ -295,9 +295,9 @@ string CodeGenerator::generateString(const string &input)
     string result = static_cast<ostringstream*>(out)->str();
 
     delete out;
-    out=NULL;
+    out=nullptr;
     delete in;
-    in=NULL;
+    in=nullptr;
 
     return result;
 }
@@ -325,9 +325,9 @@ string CodeGenerator::generateStringFromFile(const string &inFileName)
     string result = static_cast<ostringstream*>(out)->str();
 
     delete out;
-    out=NULL;
+    out=nullptr;
     delete in;
-    in=NULL;
+    in=nullptr;
 
     return result;
 }
@@ -365,11 +365,11 @@ ParseError CodeGenerator::generateFileFromString (const string &sourceStr,
 
     if (!outFileName.empty()) {
         delete out;
-        out=NULL;
+        out=nullptr;
     }
 
     delete in;
-    in=NULL;
+    in=nullptr;
 
     return error;
 }
@@ -403,7 +403,7 @@ bool CodeGenerator::parseSGRParameters(const string& line, size_t begin, size_t 
     string codes=line.substr(begin, end-begin);
     vector<string> codeVector = StringTools::splitString(codes, ';');
 
-    vector<string>::iterator itVectorData = codeVector.begin();
+    auto itVectorData = codeVector.begin();
     while( itVectorData != codeVector.end()) {
         StringTools::str2num<int>(ansiCode, *(itVectorData), std::dec);
         elementStyle.setReset(false);
@@ -1399,13 +1399,13 @@ void CodeGenerator::xterm2rgb(unsigned char color, unsigned char* rgb)
 string CodeGenerator::rgb2html(unsigned char* rgb){
   char colorString[10]= {0};
   sprintf(colorString, "#%02x%02x%02x", rgb[0], rgb[1], rgb[2]);
-  return string(colorString);
+  return {colorString};
 }
 
 string CodeGenerator::rgb2html(int r, int g, int b){
   char colorString[10]= {0};
   sprintf(colorString, "#%02x%02x%02x", r, g, b);
-  return string(colorString);
+  return {colorString};
 }
 
 const unsigned char CodeGenerator::valuerange[] = { 0x00, 0x5F, 0x87, 0xAF, 0xD7, 0xFF };
@@ -1476,9 +1476,9 @@ bool CodeGenerator::setColorMap(const string& mapPath){
 
         s>>colorCode;
         if (colorCode.size()>=7 && colorCode[0]=='#' ) {
-          workingPalette[idx][0] = (char)std::strtol(colorCode.substr ( 1, 2 ).c_str(), NULL, 16);
-          workingPalette[idx][1] = (char)std::strtol(colorCode.substr ( 3, 2 ).c_str(), NULL, 16);
-          workingPalette[idx][2] = (char)std::strtol(colorCode.substr ( 5, 2 ).c_str(), NULL, 16);
+          workingPalette[idx][0] = (char)std::strtol(colorCode.substr ( 1, 2 ).c_str(), nullptr, 16);
+          workingPalette[idx][1] = (char)std::strtol(colorCode.substr ( 3, 2 ).c_str(), nullptr, 16);
+          workingPalette[idx][2] = (char)std::strtol(colorCode.substr ( 5, 2 ).c_str(), nullptr, 16);
         } else {
           return false;
         }

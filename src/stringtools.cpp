@@ -26,7 +26,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include "stringtools.h"
 
 // Avoid problems with isspace and UTF-8 characters, use iswspace
-#include <wctype.h>
+#include <cwctype>
 
 namespace StringTools
 {
@@ -60,7 +60,7 @@ string trimRight(const string &value)
 
     if (where == string::npos)
         // string has nothing but space
-        return string();
+        return {};
 
     if (where == (value.length() - 1))
         // string has no trailing space, don't copy its contents
@@ -74,7 +74,7 @@ string getParantheseVal(const string &s)
     string::size_type openPos=s.find('(');
     string::size_type closePos=s.rfind(')');
     if (openPos ==string::npos || closePos==string::npos) {
-        return string();
+        return {};
     }
     return s.substr(openPos+1, closePos-openPos-1);
 }

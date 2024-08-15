@@ -71,7 +71,7 @@ string PangoGenerator::getOpenTag()
            << elementStyle.getBgColour().getGreen(HTML)
            << elementStyle.getBgColour().getBlue(HTML)
            << "\"";
-    }  
+    }
     string fmt  = fmtStream.str();
     tagIsOpen = fmt.size()>0;
     if (tagIsOpen) {
@@ -127,10 +127,10 @@ string PangoGenerator::maskCharacter(unsigned char c)
     case '\t':
         return "\t";
         break;
-	
+
     default :
         if (c>0x1f ) { // printable?
-            return string( 1, c );
+            return string( 1, c );;
         } else {
             return "";
         }

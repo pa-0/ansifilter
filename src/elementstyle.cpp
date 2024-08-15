@@ -36,7 +36,7 @@ ElementStyle::ElementStyle()
 {}
 
 ElementStyle::~ElementStyle()
-{}
+= default;
 
 bool ElementStyle::isItalic() const
 {

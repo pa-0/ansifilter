@@ -185,7 +185,7 @@ string LaTeXGenerator::maskCharacter(unsigned char c)
 
     default :
         if (c>0x1f ) { // printable?
-            return string( 1, c );
+            return string( 1, c );;
         } else {
             return "";
         }
