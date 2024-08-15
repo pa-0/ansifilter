@@ -23,6 +23,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <sstream>
+#include <unordered_map>
 
 #include "charcodes.h"
 #include "version.h"
