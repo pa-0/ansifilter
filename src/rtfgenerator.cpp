@@ -327,534 +327,93 @@ string RtfGenerator::unicodeFromHTML(const string &htmlEntity){
   return decCode;
 }
 
-string RtfGenerator::maskCP437Character(unsigned char c)
-{
-  switch (c) {
-    case 0:
-   // case ' ' :
-      return " "; break;
+std::string RtfGenerator::maskCP437Character(unsigned char c) {
+    static const std::unordered_map<unsigned char, std::string> charMap = {
+        {0x01, "&#x263a;"}, {0x02, "&#x263b;"}, {0x03, "&#x2665;"}, {0x04, "&#x2666;"},
+        {0x05, "&#x2663;"}, {0x06, "&#x2660;"}, {0x08, "&#x25d8;"}, {0x0a, "&#x25d9;"},
+        {0x0b, "&#x2642;"}, {0x0c, "&#x2640;"}, {0x10, "&#x25BA;"}, {0x11, "&#x25C4;"},
+        {0x12, "&#x2195;"}, {0x13, "&#x203C;"}, {0x14, "&#x00b6;"}, {0x15, "&#x00a7;"},
+        {0x16, "&#x25ac;"}, {0x17, "&#x21A8;"}, {0x18, "&#x2191;"}, {0x19, "&#x2193;"},
+        {0x1a, "&#x2192;"}, {0x1b, "&#x2190;"}, {0x1c, "&#x221F;"}, {0x1d, "&#x2194;"},
+        {0x1e, "&#x25B2;"}, {0x1f, "&#x25BC;"}, {0x80, "&#x00c7;"}, {0x81, "&#x00fc;"},
+        {0x82, "&#x00e9;"}, {0x83, "&#x00e2;"}, {0x84, "&#x00e4;"}, {0x85, "&#x00e0;"},
+        {0x86, "&#x00e5;"}, {0x87, "&#x00e7;"}, {0x88, "&#x00ea;"}, {0x89, "&#x00eb;"},
+        {0x8a, "&#x00e8;"}, {0x8b, "&#x00ef;"}, {0x8c, "&#x00ee;"}, {0x8d, "&#x00ec;"},
+        {0x8e, "&#x00c4;"}, {0x8f, "&#x00c5;"}, {0x90, "&#x00c9;"}, {0x91, "&#x00e6;"},
+        {0x92, "&#x00c6;"}, {0x93, "&#x00f4;"}, {0x94, "&#x00f6;"}, {0x95, "&#x00f2;"},
+        {0x96, "&#x00fb;"}, {0x97, "&#x00f9;"}, {0x98, "&#x00ff;"}, {0x99, "&#x00d6;"},
+        {0x9a, "&#x00dc;"}, {0x9b, "&#x00a2;"}, {0x9c, "&#x00a3;"}, {0x9d, "&#x00a5;"},
+        {0x9e, "&#x20a7;"}, {0x9f, "&#x0192;"}, {0xa0, "&#x00e1;"}, {0xa1, "&#x00ed;"},
+        {0xa2, "&#x00f3;"}, {0xa3, "&#x00fa;"}, {0xa4, "&#x00f1;"}, {0xa5, "&#x00d1;"},
+        {0xa6, "&#x00aa;"}, {0xa7, "&#x00ba;"}, {0xa8, "&#x00bf;"}, {0xa9, "&#x2310;"},
+        {0xaa, "&#x00ac;"}, {0xab, "&#x00bd;"}, {0xac, "&#x00bc;"}, {0xad, "&#x00a1;"},
+        {0xae, "&#x00ab;"}, {0xaf, "&#x00bb;"}, {0xe0, "&#x03b1;"}, {0xe1, "&#x00df;"},
+        {0xe2, "&#x0393;"}, {0xe3, "&#x03c0;"}, {0xe4, "&#x03a3;"}, {0xe5, "&#x03c3;"},
+        {0xe6, "&#x00b5;"}, {0xe7, "&#x03c4;"}, {0xe8, "&#x03a6;"}, {0xe9, "&#x0398;"},
+        {0xea, "&#x03a9;"}, {0xeb, "&#x03b4;"}, {0xec, "&#x221e;"}, {0xed, "&#x03c6;"},
+        {0xee, "&#x03b5;"}, {0xef, "&#x2229;"}, {0xf0, "&#x2261;"}, {0xf1, "&#x00b1;"},
+        {0xf2, "&#x2265;"}, {0xf3, "&#x2264;"}, {0xf4, "&#x2320;"}, {0xf5, "&#x2321;"},
+        {0xf6, "&#x00f7;"}, {0xf7, "&#x2248;"}, {0xf8, "&#x00b0;"}, {0xf9, "&#x2219;"},
+        {0xfa, "&#x00b7;"}, {0xfb, "&#x221a;"}, {0xfc, "&#x207F;"}, {0xfd, "&#x00b2;"},
+        {0xfe, "&#x25a0;"}, {0xff, "&#x00a0;"}
+    };
 
-    case '}' :
-    case '{' :
-    case '\\' : {
-      string m;
-      m="\\";
-      return m+=c;
+    // Check for special cases first
+    if (c == 0) {
+        return " ";
+    } else if (c == '}' || c == '{' || c == '\\') {
+        return "\\" + std::string(1, c);
+    } else if (std::isdigit(c)) {
+        return "{" + std::string(1, c) + "}";
+    } else if (c == '\t') {
+        return "\t";
     }
-    break;
-    case '\t' : // see deletion of nonprintable chars below
-      return "\t";
-      break;
 
-
-    case '0':
-    case '1':
-    case '2':
-    case '3':
-    case '4':
-    case '5':
-    case '6':
-    case '7':
-    case '8':
-    case '9': {
-      string m;
-      m="{";
-      m+=c;
-      m+="}";
-      return m;
+    // Find in map
+    auto it = charMap.find(c);
+    if (it != charMap.end()) {
+        return unicodeFromHTML(it->second);
     }
-    break;
 
-    case 0x01:
-      return unicodeFromHTML("&#x263a;");
-      break;
-    case 0x02:
-      return unicodeFromHTML("&#x263b;");
-      break;
-    case 0x03:
-      return unicodeFromHTML("&#x2665;");
-      break;
-    case 0x04:
-      return unicodeFromHTML("&#x2666;");
-      break;
-    case 0x05:
-      return unicodeFromHTML("&#x2663;");
-      break;
-    case 0x06:
-      return unicodeFromHTML("&#x2660;");
-      break;
-    case 0x08:
-      return unicodeFromHTML("&#x25d8;");
-      break;
-    case 0x0a:
-      return unicodeFromHTML("&#x25d9;");
-      break;
-    case 0x0b:
-      return unicodeFromHTML("&#x2642;");
-      break;
-    case 0x0c:
-      return unicodeFromHTML("&#x2640;");
-      break;
+    // Default case for shades and box drawings
+    static const std::unordered_map<unsigned char, std::string> specialMap = {
+        {0xb0, "\\u9617?"}, {0xb1, "\\u9618?"}, {0xb2, "\\u9619?"},
+        {0xb3, "\\u9474?"}, {0xb4, "\\u9508?"}, {0xb5, "\\u9569?"},
+        {0xb6, "\\u9570?"}, {0xb7, "\\u9558?"}, {0xb8, "\\u9557?"},
+        {0xb9, "\\u9571?"}, {0xba, "\\u9553?"}, {0xbb, "\\u9559?"},
+        {0xbc, "\\u9565?"}, {0xbd, "\\u9564?"}, {0xbe, "\\u9563?"},
+        {0xbf, "\\u9488?"}, {0xc0, "\\u9492?"}, {0xc1, "\\u9524?"},
+        {0xc2, "\\u9516?"}, {0xc3, "\\u9500?"}, {0xc4, "\\u9472?"},
+        {0xc5, "\\u9532?"}, {0xc6, "\\u9566?"}, {0xc7, "\\u9567?"},
+        {0xc8, "\\u9562?"}, {0xc9, "\\u9556?"}, {0xca, "\\u9577?"},
+        {0xcb, "\\u9574?"}, {0xcc, "\\u9568?"}, {0xcd, "\\u9552?"},
+        {0xce, "\\u9580?"}, {0xcf, "\\u9575?"}, {0xd0, "\\u9576?"},
+        {0xd1, "\\u9572?"}, {0xd2, "\\u9573?"}, {0xd3, "\\u9561?"},
+        {0xd4, "\\u9560?"}, {0xd5, "\\u9554?"}, {0xd6, "\\u9555?"},
+        {0xd7, "\\u9578?"}, {0xd8, "\\u9580?"}, {0xd9, "\\u9579?"},
+        {0xda, "\\u9581?"}, {0xdb, "\\u9570?"}, {0xdc, "\\u9571?"},
+        {0xdd, "\\u9565?"}, {0xde, "\\u9582?"}, {0xdf, "\\u9584?"},
+        {0xe0, "\\u9516?"}, {0xe1, "\\u9508?"}, {0xe2, "\\u9510?"},
+        {0xe3, "\\u9520?"}, {0xe4, "\\u9500?"}, {0xe5, "\\u9556?"},
+        {0xe6, "\\u9566?"}, {0xe7, "\\u9563?"}, {0xe8, "\\u9562?"},
+        {0xe9, "\\u9474?"}, {0xea, "\\u9552?"}, {0xeb, "\\u9532?"},
+        {0xec, "\\u9516?"}, {0xed, "\\u9524?"}, {0xee, "\\u9576?"},
+        {0xef, "\\u9573?"}, {0xf0, "\\u9560?"}, {0xf1, "\\u9512?"},
+        {0xf2, "\\u9513?"}, {0xf3, "\\u9501?"}, {0xf4, "\\u9508?"},
+        {0xf5, "\\u9514?"}, {0xf6, "\\u9500?"}, {0xf7, "\\u9517?"},
+        {0xf8, "\\u9528?"}, {0xf9, "\\u9502?"}, {0xfa, "\\u9511?"},
+        {0xfb, "\\u9508?"}, {0xfc, "\\u9523?"}, {0xfd, "\\u9518?"},
+        {0xfe, "\\u9583?"}, {0xff, "\\u2588?"}
+    };
 
-    case 0x10:
-      return unicodeFromHTML("&#x25BA;");
-      break;
-    case 0x11:
-      return unicodeFromHTML("&#x25C4;");
-      break;
-    case 0x12:
-      return unicodeFromHTML("&#x2195;");
-      break;
-    case 0x13:
-      return unicodeFromHTML("&#x203C;");
-      break;
-    case 0x14:
-      return unicodeFromHTML("&#x00b6;");
-      break;
-    case 0x15:
-      return unicodeFromHTML("&#x00a7;");
-      break;
-    case 0x16:
-      return unicodeFromHTML("&#x25ac;");
-      break;
-    case 0x17:
-      return unicodeFromHTML("&#x21A8;");
-      break;
-    case 0x18:
-      return unicodeFromHTML("&#x2191;");
-      break;
-    case 0x19:
-      return unicodeFromHTML("&#x2193;");
-      break;
-    case 0x1a:
-      return unicodeFromHTML("&#x2192;");
-      break;
-    case 0x1b:
-      return unicodeFromHTML("&#x2190;");
-      break;
-    case 0x1c:
-      return unicodeFromHTML("&#x221F;");
-      break;
-    case 0x1d:
-      return unicodeFromHTML("&#x2194;");
-      break;
-    case 0x1e:
-      return unicodeFromHTML("&#x25B2;");
-      break;
-    case 0x1f:
-      return unicodeFromHTML("&#x25BC;");
-      break;
-
-    case 0x80:
-      return unicodeFromHTML("&#x00c7;");
-      break;
-    case 0x81:
-      return unicodeFromHTML("&#x00fc;");
-      break;
-    case 0x82:
-      return unicodeFromHTML("&#x00e9;");
-      break;
-    case 0x83:
-      return unicodeFromHTML("&#x00e2;");
-      break;
-    case 0x84:
-      return unicodeFromHTML("&#x00e4;");
-      break;
-    case 0x85:
-      return unicodeFromHTML("&#x00e0;");
-      break;
-    case 0x86:
-      return unicodeFromHTML("&#x00e5;");
-      break;
-    case 0x87:
-      return unicodeFromHTML("&#x00e7;");
-      break;
-    case 0x88:
-      return unicodeFromHTML("&#x00ea;");
-      break;
-    case 0x89:
-      return unicodeFromHTML("&#x00eb;");
-      break;
-    case 0x8a:
-      return unicodeFromHTML("&#x00e8;");
-      break;
-    case 0x8b:
-      return unicodeFromHTML("&#x00ef;");
-      break;
-    case 0x8c:
-      return unicodeFromHTML("&#x00ee;");
-      break;
-    case 0x8d:
-      return unicodeFromHTML("&#x00ec;");
-      break;
-    case 0x8e:
-      return unicodeFromHTML("&#x00c4;");
-      break;
-    case 0x8f:
-      return unicodeFromHTML("&#x00c5;");
-      break;
-
-    case 0x90:
-      return unicodeFromHTML("&#x00c9;");
-      break;
-    case 0x91:
-      return unicodeFromHTML("&#x00e6;");
-      break;
-    case 0x92:
-      return unicodeFromHTML("&#x00c6;");
-      break;
-    case 0x93:
-      return unicodeFromHTML("&#x00f4;");
-      break;
-    case 0x94:
-      return unicodeFromHTML("&#x00f6;");
-      break;
-    case 0x95:
-      return unicodeFromHTML("&#x00f2;");
-      break;
-    case 0x96:
-      return unicodeFromHTML("&#x00fb;");
-      break;
-    case 0x97:
-      return unicodeFromHTML("&#x00f9;");
-      break;
-    case 0x98:
-      return unicodeFromHTML("&#x00ff;");
-      break;
-    case 0x99:
-      return unicodeFromHTML("&#x00d6;");
-      break;
-    case 0x9a:
-      return unicodeFromHTML("&#x00dc;");
-      break;
-    case 0x9b:
-      return unicodeFromHTML("&#x00a2;");
-      break;
-    case 0x9c:
-      return unicodeFromHTML("&#x00a3;");
-      break;
-    case 0x9d:
-      return unicodeFromHTML("&#x00a5;");
-      break;
-    case 0x9e:
-      return unicodeFromHTML("&#x20a7;");
-      break;
-    case 0x9f:
-      return unicodeFromHTML("&#x0192;");
-      break;
-
-    case 0xa0:
-      return unicodeFromHTML("&#x00e1;");
-      break;
-    case 0xa1:
-      return unicodeFromHTML("&#x00ed;");
-      break;
-    case 0xa2:
-      return unicodeFromHTML("&#x00f3;");
-      break;
-    case 0xa3:
-      return unicodeFromHTML("&#x00fa;");
-      break;
-    case 0xa4:
-      return unicodeFromHTML("&#x00f1;");
-      break;
-    case 0xa5:
-      return unicodeFromHTML("&#x00d1;");
-      break;
-    case 0xa6:
-      return unicodeFromHTML("&#x00aa;");
-      break;
-    case 0xa7:
-      return unicodeFromHTML("&#x00ba;");
-      break;
-    case 0xa8:
-      return unicodeFromHTML("&#x00bf;");
-      break;
-    case 0xa9:
-      return unicodeFromHTML("&#x2310;");
-      break;
-    case 0xaa:
-      return unicodeFromHTML("&#x00ac;");
-      break;
-    case 0xab:
-      return unicodeFromHTML("&#x00bd;");
-      break;
-    case 0xac:
-      return unicodeFromHTML("&#x00bc;");
-      break;
-    case 0xad:
-      return unicodeFromHTML("&#x00a1;");
-      break;
-    case 0xae:
-      return unicodeFromHTML("&#x00ab;");
-      break;
-    case 0xaf:
-      return unicodeFromHTML("&#x00bb;");
-      break;
-
-      //shades
-    case 0xb0:
-      return "\\u9617?";
-      break;
-    case 0xb1:
-      return "\\u9618?";
-      break;
-    case 0xb2:
-      return "\\u9619?";
-      break;
-
-      //box drawings
-    case 0xb3:
-      return "\\u9474?";
-      break;
-    case 0xb4:
-      return "\\u9508?";
-      break;
-    case 0xb5:
-      return "\\u9569?";
-      break;
-    case 0xb6:
-      return "\\u9570?";
-      break;
-    case 0xb7:
-      return "\\u9558?";
-      break;
-    case 0xb8:
-      return "\\u9557?";
-      break;
-    case 0xb9:
-      return "\\u9571?";
-      break;
-    case 0xba:
-      return "\\u9553?";
-      break;
-    case 0xbb:
-      return "\\u9559?";
-      break;
-    case 0xbc:
-      return "\\u9565?";
-      break;
-    case 0xbd:
-      return "\\u9564?";
-      break;
-    case 0xbe:
-      return "\\u9563?";
-      break;
-    case 0xbf:
-      return "\\u9488?";
-      break;
-
-    case 0xc0:
-      return "\\u9492?";
-      break;
-    case 0xc1:
-      return "\\u9524?";
-      break;
-    case 0xc2:
-      return "\\u9516?";
-      break;
-    case 0xc3:
-      return "\\u9500?";
-      break;
-    case 0xc4:
-      return "\\u9472?";
-      break;
-    case 0xc5:
-      return "\\u9532?";
-      break;
-    case 0xc6:
-      return "\\u9566?";
-      break;
-    case 0xc7:
-      return "\\u9567?";
-      break;
-    case 0xc8:
-      return "\\u9562?";
-      break;
-    case 0xc9:
-      return "\\u9556?";
-      break;
-    case 0xca:
-      return "\\u9577?";
-      break;
-    case 0xcb:
-      return "\\u9574?";
-      break;
-    case 0xcc:
-      return "\\u9568?";
-      break;
-    case 0xcd:
-      return "\\u9552?";
-      break;
-    case 0xce:
-      return "\\u9580?";
-      break;
-    case 0xcf:
-      return "\\u9575?";
-      break;
-
-    case 0xd0:
-      return "\\u9576?";
-      break;
-    case 0xd1:
-      return "\\u9572?";
-      break;
-    case 0xd2:
-      return "\\u9573?";
-      break;
-    case 0xd3:
-      return "\\u9561?";
-      break;
-    case 0xd4:
-      return "\\u9560?";
-      break;
-    case 0xd5:
-      return "\\u9554?";
-      break;
-    case 0xd6:
-      return "\\u9555?";
-      break;
-    case 0xd7:
-      return "\\u9579?";
-      break;
-    case 0xd8:
-      return "\\u9578?";
-      break;
-    case 0xd9:
-      return "\\u9496?";
-      break;
-    case 0xda:
-      return "\\u9484?";
-      break;
-
-      //https://de.wikipedia.org/wiki/Unicodeblock_Blockelemente
-    case 0xdb:
-      return "\\u9608?";
-      break;
-    case 0xdc:
-      return "\\u9604?";
-      break;
-    case 0xdd:
-      return "\\u9612?";
-      break;
-    case 0xde:
-      return "\\u9616?";
-      break;
-    case 0xdf:
-      return "\\u9600?";
-      break;
-
-    case 0xe0:
-      return unicodeFromHTML("&#x03b1;");
-      break;
-    case 0xe1:
-      return unicodeFromHTML("&#x00df;");
-      break;
-    case 0xe2:
-      return unicodeFromHTML("&#x0393;");
-      break;
-    case 0xe3:
-      return unicodeFromHTML("&#x03c0;");
-      break;
-    case 0xe4:
-      return unicodeFromHTML("&#x03a3;");
-      break;
-    case 0xe5:
-      return unicodeFromHTML("&#x03c3;");
-      break;
-    case 0xe6:
-      return unicodeFromHTML("&#x00b5;");
-      break;
-    case 0xe7:
-      return unicodeFromHTML("&#x03c4;");
-      break;
-    case 0xe8:
-      return unicodeFromHTML("&#x03a6;");
-      break;
-    case 0xe9:
-      return unicodeFromHTML("&#x0398;");
-      break;
-    case 0xea:
-      return unicodeFromHTML("&#x03a9;");
-      break;
-    case 0xeb:
-      return unicodeFromHTML("&#x03b4;");
-      break;
-
-    case 0xec:
-      return unicodeFromHTML("&#x221e;");
-      break;
-    case 0xed:
-      return unicodeFromHTML("&#x03c6;");
-      break;
-    case 0xee:
-      return unicodeFromHTML("&#x03b5;");
-      break;
-    case 0xef:
-      return unicodeFromHTML("&#x2229;");
-      break;
-
-    case 0xf0:
-      return unicodeFromHTML("&#x2261;");
-      break;
-
-    case 0xf1:
-      return unicodeFromHTML("&#x00b1;");
-      break;
-    case 0xf2:
-      return unicodeFromHTML("&#x2265;");
-      break;
-    case 0xf3:
-      return unicodeFromHTML("&#x2264;");
-      break;
-    case 0xf4:
-      return unicodeFromHTML("&#x2320;");
-      break;
-    case 0xf5:
-      return unicodeFromHTML("&#x2321;");
-      break;
-    case 0xf6:
-      return unicodeFromHTML("&#x00f7;");
-      break;
-    case 0xf7:
-      return unicodeFromHTML("&#x2248;");
-      break;
-    case 0xf8:
-      return unicodeFromHTML("&#x00b0;");
-      break;
-
-    case 0xf9:
-      return unicodeFromHTML("&#x2219;");
-      break;
-    case 0xfa:
-      return unicodeFromHTML("&#x00b7;");
-      break;
-    case 0xfb:
-      return unicodeFromHTML("&#x221a;");
-      break;
-    case 0xfc:
-      return unicodeFromHTML("&#x207F;");
-      break;
-    case 0xfd:
-      return unicodeFromHTML("&#x20b2;");
-      break;
-    case 0xfe:
-      return unicodeFromHTML("&#x25a0;");
-      break;
-
-    case 0xff:
-      return " ";
-      break;
-
-    default : {
-      if (c ) {
-        return string( 1, c );;
-      } else {
-        return "";
-      }
+    auto specialIt = specialMap.find(c);
+    if (specialIt != specialMap.end()) {
+        return specialIt->second;
     }
-  }
+
+    return " "; // Default to a space for unknown characters
 }
+
 
 void RtfGenerator::setPageSize(const string & ps)
 {

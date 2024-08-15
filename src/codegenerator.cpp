@@ -124,8 +124,7 @@ CodeGenerator::CodeGenerator(ansifilter::OutputType type)
 {
 }
 
-CodeGenerator::~CodeGenerator()
-= default;
+CodeGenerator::~CodeGenerator() = default;
 
 void CodeGenerator::setDefaultForegroundColor()
 {
@@ -213,10 +212,8 @@ void CodeGenerator::setStyleSheet(const std::string& path)
 }
 
 void CodeGenerator::setPreformatting ( WrapMode lineWrappingStyle,
-                                       unsigned int lineLength
-                                     )
+                                       unsigned int lineLength)
 {
-
     lineWrapLen = lineLength;
 }
 
@@ -381,7 +378,6 @@ bool CodeGenerator::printDynamicStyleFile ( const string &outPath )
 }
 
 /*
-
  ESC[nL       Inserts n blank lines at cursor line.   (NANSI)
  ESC[nM       Deletes n lines including cursor line.  (NANSI)
  ESC[n@       Inserts n blank chars at cursor.        (NANSI)
@@ -1397,15 +1393,16 @@ void CodeGenerator::xterm2rgb(unsigned char color, unsigned char* rgb)
 }
 
 string CodeGenerator::rgb2html(unsigned char* rgb){
-  char colorString[10]= {0};
-  sprintf(colorString, "#%02x%02x%02x", rgb[0], rgb[1], rgb[2]);
-  return {colorString};
+
+  std::array<char, 8> colorString;  // 7 characters for "#RRGGBB" and 1 for '\0'
+  std::snprintf(colorString.data(), colorString.size(), "#%02x%02x%02x", rgb[0], rgb[1], rgb[2]);
+  return std::string(colorString.data());
 }
 
 string CodeGenerator::rgb2html(int r, int g, int b){
-  char colorString[10]= {0};
-  sprintf(colorString, "#%02x%02x%02x", r, g, b);
-  return {colorString};
+  std::array<char, 8> colorString;  // 7 characters for "#RRGGBB" and 1 for '\0'
+  std::snprintf(colorString.data(), colorString.size(), "#%02x%02x%02x", r, g, b);
+  return std::string(colorString.data());
 }
 
 const unsigned char CodeGenerator::valuerange[] = { 0x00, 0x5F, 0x87, 0xAF, 0xD7, 0xFF };

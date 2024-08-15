@@ -27,6 +27,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <unordered_map>
 
 #include "htmlgenerator.h"
 #include "version.h"
@@ -318,521 +319,173 @@ string HtmlGenerator::maskCharacter(unsigned char c)
     }
 }
 
-string HtmlGenerator::maskCP437Character(unsigned char c)
-{
-  switch (c) {
-    case 0 :
-      return " ";
-      break;
+std::string HtmlGenerator::maskCP437Character(unsigned char c) {
+    static const std::unordered_map<unsigned char, std::string> charMap = {
+        {0x00, " "},
+        {'<', "&lt;"},
+        {'>', "&gt;"},
+        {'&', "&amp;"},
+        {'\"', "&quot;"},
+        {'\'', "&apos;"},
+        {'\t', "\t"},
+        {0x01, "&#x263a;"},
+        {0x02, "&#x263b;"},
+        {0x03, "&#x2665;"},
+        {0x04, "&#x2666;"},
+        {0x05, "&#x2663;"},
+        {0x06, "&#x2660;"},
+        {0x08, "&#x25d8;"},
+        {0x0a, "&#x25d9;"},
+        {0x0b, "&#x2642;"},
+        {0x0c, "&#x2640;"},
+        {0x10, "&#x25BA;"},
+        {0x11, "&#x25C4;"},
+        {0x12, "&#x2195;"},
+        {0x13, "&#x203C;"},
+        {0x14, "&#x00b6;"},
+        {0x15, "&#x00a7;"},
+        {0x16, "&#x25ac;"},
+        {0x17, "&#x21A8;"},
+        {0x18, "&#x2191;"},
+        {0x19, "&#x2193;"},
+        {0x1a, "&#x2192;"},
+        {0x1b, "&#x2190;"},
+        {0x1c, "&#x221F;"},
+        {0x1d, "&#x2194;"},
+        {0x1e, "&#x25B2;"},
+        {0x1f, "&#x25BC;"},
+        {0x80, "&#x00c7;"},
+        {0x81, "&#x00fc;"},
+        {0x82, "&#x00e9;"},
+        {0x83, "&#x00e2;"},
+        {0x84, "&#x00e4;"},
+        {0x85, "&#x00e0;"},
+        {0x86, "&#x00e5;"},
+        {0x87, "&#x00e7;"},
+        {0x88, "&#x00ea;"},
+        {0x89, "&#x00eb;"},
+        {0x8a, "&#x00e8;"},
+        {0x8b, "&#x00ef;"},
+        {0x8c, "&#x00ee;"},
+        {0x8d, "&#x00ec;"},
+        {0x8e, "&#x00c4;"},
+        {0x8f, "&#x00c5;"},
+        {0x90, "&#x00c9;"},
+        {0x91, "&#x00e6;"},
+        {0x92, "&#x00c6;"},
+        {0x93, "&#x00f4;"},
+        {0x94, "&#x00f6;"},
+        {0x95, "&#x00f2;"},
+        {0x96, "&#x00fb;"},
+        {0x97, "&#x00f9;"},
+        {0x98, "&#x00ff;"},
+        {0x99, "&#x00d6;"},
+        {0x9a, "&#x00dc;"},
+        {0x9b, "&#x00a2;"},
+        {0x9c, "&#x00a3;"},
+        {0x9d, "&#x00a5;"},
+        {0x9e, "&#x20a7;"},
+        {0x9f, "&#x0192;"},
+        {0xa0, "&#x00e1;"},
+        {0xa1, "&#x00ed;"},
+        {0xa2, "&#x00f3;"},
+        {0xa3, "&#x00fa;"},
+        {0xa4, "&#x00f1;"},
+        {0xa5, "&#x00d1;"},
+        {0xa6, "&#x00aa;"},
+        {0xa7, "&#x00ba;"},
+        {0xa8, "&#x00bf;"},
+        {0xa9, "&#x2310;"},
+        {0xaa, "&#x00ac;"},
+        {0xab, "&#x00bd;"},
+        {0xac, "&#x00bc;"},
+        {0xad, "&#x00a1;"},
+        {0xae, "&#x00ab;"},
+        {0xaf, "&#x00bb;"},
+        {0xb0, "&#9617;"},
+        {0xb1, "&#9618;"},
+        {0xb2, "&#9619;"},
+        {0xb3, "&#9474;"},
+        {0xb4, "&#9508;"},
+        {0xb5, "&#9569;"},
+        {0xb6, "&#9570;"},
+        {0xb7, "&#9558;"},
+        {0xb8, "&#9557;"},
+        {0xb9, "&#9571;"},
+        {0xba, "&#9553;"},
+        {0xbb, "&#9559;"},
+        {0xbc, "&#9565;"},
+        {0xbd, "&#9564;"},
+        {0xbe, "&#9563;"},
+        {0xbf, "&#9488;"},
+        {0xc0, "&#9492;"},
+        {0xc1, "&#9524;"},
+        {0xc2, "&#9516;"},
+        {0xc3, "&#9500;"},
+        {0xc4, "&#9472;"},
+        {0xc5, "&#9532;"},
+        {0xc6, "&#9566;"},
+        {0xc7, "&#9567;"},
+        {0xc8, "&#9562;"},
+        {0xc9, "&#9556;"},
+        {0xca, "&#9577;"},
+        {0xcb, "&#9574;"},
+        {0xcc, "&#9568;"},
+        {0xcd, "&#9552;"},
+        {0xce, "&#9580;"},
+        {0xcf, "&#9575;"},
+        {0xd0, "&#9576;"},
+        {0xd1, "&#9572;"},
+        {0xd2, "&#9573;"},
+        {0xd3, "&#9561;"},
+        {0xd4, "&#9560;"},
+        {0xd5, "&#9554;"},
+        {0xd6, "&#9555;"},
+        {0xd7, "&#9579;"},
+        {0xd8, "&#9578;"},
+        {0xd9, "&#9496;"},
+        {0xda, "&#9484;"},
+        {0xdb, "&#9608;"},
+        {0xdc, "&#9604;"},
+        {0xdd, "&#9612;"},
+        {0xde, "&#9616;"},
+        {0xdf, "&#9600;"},
+        {0xe0, "&#x03b1;"},
+        {0xe1, "&#x00df;"},
+        {0xe2, "&#x0393;"},
+        {0xe3, "&#x03c0;"},
+        {0xe4, "&#x03a3;"},
+        {0xe5, "&#x03c3;"},
+        {0xe6, "&#x00b5;"},
+        {0xe7, "&#x03c4;"},
+        {0xe8, "&#x03a6;"},
+        {0xe9, "&#x0398;"},
+        {0xea, "&#x03a9;"},
+        {0xeb, "&#x03b4;"},
+        {0xec, "&#x221e;"},
+        {0xed, "&#x03c6;"},
+        {0xee, "&#x03b5;"},
+        {0xef, "&#x2229;"},
+        {0xf0, "&#x2261;"},
+        {0xf1, "&#x00b1;"},
+        {0xf2, "&#x2265;"},
+        {0xf3, "&#x2264;"},
+        {0xf4, "&#x2320;"},
+        {0xf5, "&#x2321;"},
+        {0xf6, "&#x00f7;"},
+        {0xf7, "&#x2248;"},
+        {0xf8, "&#x00b0;"},
+        {0xf9, "&#x2219;"},
+        {0xfa, "&#x00b7;"},
+        {0xfb, "&#x221a;"},
+        {0xfc, "&#x207f;"},
+        {0xfd, "&#x00b2;"},
+        {0xfe, "&#x25a0;"},
+        {0xff, "&#x00a0;"}
+    };
 
-    case '<' :
-      return "&lt;";
-      break;
-    case '>' :
-      return "&gt;";
-      break;
-    case '&' :
-      return "&amp;";
-      break;
-    case '\"' :
-      return "&quot;";
-      break;
-    case '\'' :
-      return "&apos;";
-      break;
-    case '\t' : // see deletion of nonprintable chars below
-      return "\t";
-      break;
-
-    case 0x01:
-      return "&#x263a;";
-      break;
-    case 0x02:
-      return "&#x263b;";
-      break;
-    case 0x03:
-      return "&#x2665;";
-      break;
-    case 0x04:
-      return "&#x2666;";
-      break;
-    case 0x05:
-      return "&#x2663;";
-      break;
-    case 0x06:
-      return "&#x2660;";
-      break;
-    case 0x08:
-      return "&#x25d8;";
-      break;
-
-    case 0x0a:
-      return "&#x25d9;";
-      break;
-    case 0x0b:
-      return "&#x2642;";
-      break;
-    case 0x0c:
-      return "&#x2640;";
-      break;
-
-    case 0x10:
-      return "&#x25BA;";
-      break;
-    case 0x11:
-      return "&#x25C4;";
-      break;
-    case 0x12:
-      return "&#x2195;";
-      break;
-    case 0x13:
-      return "&#x203C;";
-      break;
-    case 0x14:
-      return "&#x00b6;";
-      break;
-    case 0x15:
-      return "&#x00a7;";
-      break;
-    case 0x16:
-      return "&#x25ac;";
-      break;
-    case 0x17:
-      return "&#x21A8;";
-      break;
-    case 0x18:
-      return "&#x2191;";
-      break;
-    case 0x19:
-      return "&#x2193;";
-      break;
-    case 0x1a:
-      return "&#x2192;";
-      break;
-    case 0x1b:
-      return "&#x2190;";
-      break;
-    case 0x1c:
-      return "&#x221F;";
-      break;
-    case 0x1d:
-      return "&#x2194;";
-      break;
-    case 0x1e:
-      return "&#x25B2;";
-      break;
-    case 0x1f:
-      return "&#x25BC;";
-      break;
-
-    case 0x80:
-      return "&#x00c7;";
-      break;
-    case 0x81:
-      return "&#x00fc;";
-      break;
-    case 0x82:
-      return "&#x00e9;";
-      break;
-    case 0x83:
-      return "&#x00e2;";
-      break;
-    case 0x84:
-      return "&#x00e4;";
-      break;
-    case 0x85:
-      return "&#x00e0;";
-      break;
-    case 0x86:
-      return "&#x00e5;";
-      break;
-    case 0x87:
-      return "&#x00e7;";
-      break;
-    case 0x88:
-      return "&#x00ea;";
-      break;
-    case 0x89:
-      return "&#x00eb;";
-      break;
-    case 0x8a:
-      return "&#x00e8;";
-      break;
-    case 0x8b:
-      return "&#x00ef;";
-      break;
-    case 0x8c:
-      return "&#x00ee;";
-      break;
-    case 0x8d:
-      return "&#x00ec;";
-      break;
-    case 0x8e:
-      return "&#x00c4;";
-      break;
-    case 0x8f:
-      return "&#x00c5;";
-      break;
-
-    case 0x90:
-      return "&#x00c9;";
-      break;
-    case 0x91:
-      return "&#x00e6;";
-      break;
-    case 0x92:
-      return "&#x00c6;";
-      break;
-    case 0x93:
-      return "&#x00f4;";
-      break;
-    case 0x94:
-      return "&#x00f6;";
-      break;
-    case 0x95:
-      return "&#x00f2;";
-      break;
-    case 0x96:
-      return "&#x00fb;";
-      break;
-    case 0x97:
-      return "&#x00f9;";
-      break;
-    case 0x98:
-      return "&#x00ff;";
-      break;
-    case 0x99:
-      return "&#x00d6;";
-      break;
-    case 0x9a:
-      return "&#x00dc;";
-      break;
-    case 0x9b:
-      return "&#x00a2;";
-      break;
-    case 0x9c:
-      return "&#x00a3;";
-      break;
-    case 0x9d:
-      return "&#x00a5;";
-      break;
-    case 0x9e:
-      return "&#x20a7;";
-      break;
-    case 0x9f:
-      return "&#x0192;";
-      break;
-
-
-    case 0xa0:
-      return "&#x00e1;";
-      break;
-    case 0xa1:
-      return "&#x00ed;";
-      break;
-    case 0xa2:
-      return "&#x00f3;";
-      break;
-    case 0xa3:
-      return "&#x00fa;";
-      break;
-    case 0xa4:
-      return "&#x00f1;";
-      break;
-    case 0xa5:
-      return "&#x00d1;";
-      break;
-    case 0xa6:
-      return "&#x00aa;";
-      break;
-    case 0xa7:
-      return "&#x00ba;";
-      break;
-    case 0xa8:
-      return "&#x00bf;";
-      break;
-    case 0xa9:
-      return "&#x2310;";
-      break;
-    case 0xaa:
-      return "&#x00ac;";
-      break;
-    case 0xab:
-      return "&#x00bd;";
-      break;
-    case 0xac:
-      return "&#x00bc;";
-      break;
-    case 0xad:
-      return "&#x00a1;";
-      break;
-    case 0xae:
-      return "&#x00ab;";
-      break;
-    case 0xaf:
-      return "&#x00bb;";
-      break;
-
-      //shades
-    case 0xb0:
-      return "&#9617;";
-      break;
-    case 0xb1:
-      return "&#9618;";
-      break;
-    case 0xb2:
-      return "&#9619;";
-      break;
-
-      //box drawings
-    case 0xb3:
-      return "&#9474;";
-      break;
-    case 0xb4:
-      return "&#9508;";
-      break;
-    case 0xb5:
-      return "&#9569;";
-      break;
-    case 0xb6:
-      return "&#9570;";
-      break;
-    case 0xb7:
-      return "&#9558;";
-      break;
-    case 0xb8:
-      return "&#9557;";
-      break;
-    case 0xb9:
-      return "&#9571;";
-      break;
-    case 0xba:
-      return "&#9553;";
-      break;
-    case 0xbb:
-      return "&#9559;";
-      break;
-    case 0xbc:
-      return "&#9565;";
-      break;
-    case 0xbd:
-      return "&#9564;";
-      break;
-    case 0xbe:
-      return "&#9563;";
-      break;
-    case 0xbf:
-      return "&#9488;";
-      break;
-
-    case 0xc0:
-      return "&#9492;";
-      break;
-    case 0xc1:
-      return "&#9524;";
-      break;
-    case 0xc2:
-      return "&#9516;";
-      break;
-    case 0xc3:
-      return "&#9500;";
-      break;
-    case 0xc4:
-      return "&#9472;";
-      break;
-    case 0xc5:
-      return "&#9532;";
-      break;
-    case 0xc6:
-      return "&#9566;";
-      break;
-    case 0xc7:
-      return "&#9567;";
-      break;
-    case 0xc8:
-      return "&#9562;";
-      break;
-    case 0xc9:
-      return "&#9556;";
-      break;
-    case 0xca:
-      return "&#9577;";
-      break;
-    case 0xcb:
-      return "&#9574;";
-      break;
-    case 0xcc:
-      return "&#9568;";
-      break;
-    case 0xcd:
-      return "&#9552;";
-      break;
-    case 0xce:
-      return "&#9580;";
-      break;
-    case 0xcf:
-      return "&#9575;";
-      break;
-
-    case 0xd0:
-      return "&#9576;";
-      break;
-    case 0xd1:
-      return "&#9572;";
-      break;
-    case 0xd2:
-      return "&#9573;";
-      break;
-    case 0xd3:
-      return "&#9561;";
-      break;
-    case 0xd4:
-      return "&#9560;";
-      break;
-    case 0xd5:
-      return "&#9554;";
-      break;
-    case 0xd6:
-      return "&#9555;";
-      break;
-    case 0xd7:
-      return "&#9579;";
-      break;
-    case 0xd8:
-      return "&#9578;";
-      break;
-    case 0xd9:
-      return "&#9496;";
-      break;
-    case 0xda:
-      return "&#9484;";
-      break;
-
-      //https://de.wikipedia.org/wiki/Unicodeblock_Blockelemente
-    case 0xdb:
-      return "&#9608;";
-      break;
-    case 0xdc:
-      return "&#9604;";
-      break;
-    case 0xdd:
-      return "&#9612;";
-      break;
-    case 0xde:
-      return "&#9616;";
-      break;
-    case 0xdf:
-      return "&#9600;";
-      break;
-
-    case 0xe0:
-      return "&#x03b1;";
-      break;
-    case 0xe1:
-      return "&#x00df;";
-      break;
-    case 0xe2:
-      return "&#x0393;";
-      break;
-    case 0xe3:
-      return "&#x03c0;";
-      break;
-    case 0xe4:
-      return "&#x03a3;";
-      break;
-    case 0xe5:
-      return "&#x03c3;";
-      break;
-    case 0xe6:
-      return "&#x00b5;";
-      break;
-    case 0xe7:
-      return "&#x03c4;";
-      break;
-    case 0xe8:
-      return "&#x03a6;";
-      break;
-    case 0xe9:
-      return "&#x0398;";
-      break;
-    case 0xea:
-      return "&#x03a9;";
-      break;
-    case 0xeb:
-      return "&#x03b4;";
-      break;
-
-    case 0xec:
-      return "&#x221e;";
-      break;
-    case 0xed:
-      return "&#x03c6;";
-      break;
-    case 0xee:
-      return "&#x03b5;";
-      break;
-    case 0xef:
-      return "&#x2229;";
-      break;
-
-    case 0xf0:
-      return "&#x2261;";
-      break;
-
-    case 0xf1:
-      return "&#x00b1;";
-      break;
-    case 0xf2:
-      return "&#x2265;";
-      break;
-    case 0xf3:
-      return "&#x2264;";
-      break;
-    case 0xf4:
-      return "&#x2320;";
-      break;
-    case 0xf5:
-      return "&#x2321;";
-      break;
-    case 0xf6:
-      return "&#x00f7;";
-      break;
-    case 0xf7:
-      return "&#x2248;";
-      break;
-    case 0xf8:
-      return "&#x00b0;";
-      break;
-
-    case 0xf9:
-      return "&#x2219;";
-      break;
-    case 0xfa:
-      return "&#x00b7;";
-      break;
-    case 0xfb:
-      return "&#x221a;";
-      break;
-    case 0xfc:
-      return "&#x207F;";
-      break;
-    case 0xfd:
-      return "&#x20b2;";
-      break;
-    case 0xfe:
-      return "&#x25a0;";
-      break;
-    case 0xff:
-      return "&nbsp;";
-      break;
-
-    default :
-        if (c>0x1f && c<0x7f) { // printable?
-            return string( 1, c );;
-        } else {
-          return "";
-        }
-  }
-};
+    auto it = charMap.find(c);
+    return it != charMap.end() ? it->second : std::string(1, c);
+}
 
 }
