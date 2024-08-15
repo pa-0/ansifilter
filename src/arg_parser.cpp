@@ -23,7 +23,7 @@
 
 
 bool Arg_parser::parse_long_option( const char * const opt, const char * const arg,
-                                    const Option options[], int & argind ) throw()
+                                    const Option options[], int & argind ) noexcept
 {
     unsigned int len;
     int index = -1;
@@ -59,7 +59,7 @@ bool Arg_parser::parse_long_option( const char * const opt, const char * const a
     }
 
     ++argind;
-    data.push_back( Record( options[index].code ) );
+    data.emplace_back( options[index].code );
 
     if( opt[len+2] ) {	// `--<long_option>=<argument>' syntax
         if( options[index].has_arg == no ) {
@@ -95,7 +95,7 @@ bool Arg_parser::parse_long_option( const char * const opt, const char * const a
 
 
 bool Arg_parser::parse_short_option( const char * const opt, const char * const arg,
-                                     const Option options[], int & argind ) throw()
+                                     const Option options[], int & argind ) noexcept
 {
     int cind = 1;			// character index in opt
 
@@ -116,7 +116,7 @@ bool Arg_parser::parse_short_option( const char * const opt, const char * const 
             return false;
         }
 
-        data.push_back( Record( code ) );
+        data.emplace_back( code );
         if( opt[++cind] == 0 ) {
             ++argind;    // opt finished
             cind = 0;
@@ -142,7 +142,7 @@ bool Arg_parser::parse_short_option( const char * const opt, const char * const 
 
 
 Arg_parser::Arg_parser( const int argc, const char * const argv[],
-                        const Option options[], const bool in_order ) throw()
+                        const Option options[], const bool in_order ) noexcept
 {
     if( argc < 2 || !argv || !options ) return;
 
@@ -155,7 +155,7 @@ Arg_parser::Arg_parser( const int argc, const char * const argv[],
 
         if( ch1 == '-' && ch2 ) {	// we found an option
             const char * const opt = argv[argind];
-            const char * const arg = (argind + 1 < argc) ? argv[argind+1] : 0;
+            const char * const arg = (argind + 1 < argc) ? argv[argind+1] : nullptr;
             if( ch2 == '-' ) {
                 if( !argv[argind][2] ) {
                     ++argind;    // we found "--"
@@ -163,21 +163,21 @@ Arg_parser::Arg_parser( const int argc, const char * const argv[],
                 } else if( !parse_long_option( opt, arg, options, argind ) ) break;
             } else if( !parse_short_option( opt, arg, options, argind ) ) break;
         } else {
-            if( !in_order ) non_options.push_back( argv[argind++] );
+            if( !in_order ) non_options.emplace_back(argv[argind++] );
             else {
-                data.push_back( Record() );
+                data.emplace_back( );
                 data.back().argument = argv[argind++];
             }
         }
     }
     if( _error.size() ) data.clear();
     else {
-        for( unsigned int i = 0; i < non_options.size(); ++i ) {
-            data.push_back( Record() );
-            data.back().argument.swap( non_options[i] );
+        for(auto & non_option : non_options) {
+            data.emplace_back( );
+            data.back().argument.swap( non_option );
         }
         while( argind < argc ) {
-            data.push_back( Record() );
+            data.emplace_back( );
             data.back().argument = argv[argind++];
         }
     }
@@ -185,7 +185,7 @@ Arg_parser::Arg_parser( const int argc, const char * const argv[],
 
 
 Arg_parser::Arg_parser( const char * const opt, const char * const arg,
-                        const Option options[] ) throw()
+                        const Option options[] ) noexcept
 {
     if( !opt || !opt[0] || !options ) return;
 
@@ -197,7 +197,7 @@ Arg_parser::Arg_parser( const char * const opt, const char * const arg,
             parse_short_option( opt, arg, options, argind );
         if( _error.size() ) data.clear();
     } else {
-        data.push_back( Record() );
+        data.emplace_back( );
         data.back().argument = opt;
     }
 }

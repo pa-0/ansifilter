@@ -52,8 +52,7 @@ PreFormatter::PreFormatter() :
 }
 
 PreFormatter::~PreFormatter()
-{
-}
+= default;
 
 bool PreFormatter::hasMoreLines()
 {
@@ -118,7 +117,7 @@ std::string PreFormatter::getNextLine()
             // als Max. Zeilenlaenge, Whitespaces verwerfen
             if ( wsPrefixLength>maxLineLength ) {
                 wsPrefixLength=0;
-                return string();
+                return {};
             } else {
                 wsPrefix=line.substr ( 0, wsPrefixLength );
             }
@@ -126,7 +125,7 @@ std::string PreFormatter::getNextLine()
         // Zeile enthaelt nur Whitespace; verwerfen
         else {
             hasMore= false;
-            return string();
+            return {};
         }
     } else {
         if ( redefineWsPrefix ) {

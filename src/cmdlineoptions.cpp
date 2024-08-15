@@ -77,7 +77,7 @@ const Arg_parser::Option options[] = {
     { 'x', "max-size",   Arg_parser::yes  },
     { 'g', "no-default-fg", Arg_parser::no  },
 
-    {  0,  0,           Arg_parser::no  }
+    {  0,  nullptr,           Arg_parser::no  }
 };
 
 CmdLineOptions::CmdLineOptions( const int argc, const char *argv[] ):
@@ -110,7 +110,7 @@ CmdLineOptions::CmdLineOptions( const int argc, const char *argv[] ):
     maxFileSize(268435456)
 {
     char* hlEnvOptions=getenv("ANSIFILTER_OPTIONS");
-    if (hlEnvOptions!=NULL) {
+    if (hlEnvOptions!=nullptr) {
         std::ostringstream envos;
         envos<<argv[0]<<" "<<hlEnvOptions;
         std::istringstream ss( envos.str());
@@ -122,14 +122,14 @@ CmdLineOptions::CmdLineOptions( const int argc, const char *argv[] ):
             ls.push_back(arg);
             options.push_back(const_cast<char*>(ls.back().c_str()));
         }
-        options.push_back(0);
+        options.push_back(nullptr);
         parseRuntimeOptions(options.size()-1, (const char**) &options[0], false);
     }
 
     parseRuntimeOptions(argc, argv);
 }
 
-CmdLineOptions::~CmdLineOptions() {}
+CmdLineOptions::~CmdLineOptions() = default;
 
 void CmdLineOptions::parseRuntimeOptions( const int argc, const char *argv[], bool readInputFilenames) {
         Arg_parser parser( argc, argv, options );
@@ -289,7 +289,7 @@ void CmdLineOptions::parseRuntimeOptions( const int argc, const char *argv[], bo
                 }
             }
         } else if (inputFileNames.empty()) {
-            inputFileNames.push_back("");
+            inputFileNames.emplace_back("");
         }
     }
 }

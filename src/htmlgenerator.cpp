@@ -71,7 +71,7 @@ string HtmlGenerator::getOpenTag()
                          elementStyle.isBold(), elementStyle.isItalic(), elementStyle.isConceal(),
                          elementStyle.isBlink(), elementStyle.isUnderline() );
 
-        std::vector<StyleInfo>::iterator fit = std::find(documentStyles.begin(), documentStyles.end(), sInfo );
+        auto fit = std::find(documentStyles.begin(), documentStyles.end(), sInfo );
         if (fit == documentStyles.end()){
             documentStyles.push_back(sInfo);
             fmtStream << "af_"<< documentStyles.size();
@@ -172,7 +172,7 @@ string HtmlGenerator::getHeader()
     os << "</style>\n";
 
     if (!styleSheetPath.empty()) {
-        os << "<link rel=\"stylesheet\" type=\"text/css\" href=\""
+        os << R"(<link rel="stylesheet" type="text/css" href=")"
            << styleSheetPath << "\">\n";
     }
     os << "<title>" << docTitle << "</title>\n";
@@ -311,7 +311,7 @@ string HtmlGenerator::maskCharacter(unsigned char c)
 
     default :
         if (c>0x1f ) { // printable?
-            return string( 1, c );
+            return  string( 1, c );
         } else {
             return "";
         }
@@ -828,7 +828,7 @@ string HtmlGenerator::maskCP437Character(unsigned char c)
 
     default :
         if (c>0x1f && c<0x7f) { // printable?
-            return string( 1, c );
+            return string( 1, c );;
         } else {
           return "";
         }

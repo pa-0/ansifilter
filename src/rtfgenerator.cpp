@@ -57,7 +57,7 @@ RtfGenerator::RtfGenerator()
 }
 
 RtfGenerator::~RtfGenerator()
-{}
+= default;
 
 string RtfGenerator::getAttributes( const StyleColour & col)
 {
@@ -99,13 +99,13 @@ string  RtfGenerator::getCloseTag()
 
 string RtfGenerator::getHyperlink(string uri, string txt){
     ostringstream os;
-    os <<"{{\\field{\\*\\fldinst HYPERLINK \""<<uri<<"\" }{\\fldrslt\\ul\\ulc0 "<<txt<<"}}}";
+    os <<R"({{\field{\*\fldinst HYPERLINK ")"<<uri<<R"(" }{\fldrslt\ul\ulc0 )"<<txt<<"}}}";
     return os.str();
 }
 
 string RtfGenerator::getHeader()
 {
-    return string();
+    return {};
 }
 
 void RtfGenerator::printBody()
@@ -120,20 +120,20 @@ void RtfGenerator::printBody()
       *out<< "\\ansi";
 
     *out <<" \\deff1"
-         << "{\\fonttbl{\\f1\\fmodern\\fprq1\\fcharset0 " ;
+         << R"({\fonttbl{\f1\fmodern\fprq1\fcharset0 )" ;
     *out << font ;
     *out << ";}}"
          << "{\\colortbl;";
 
-    for (int i=0;i<16;i++){
-      *out << getAttributes(StyleColour(rgb2html(workingPalette[i])));
+    for (auto & i : workingPalette){
+      *out << getAttributes(StyleColour(rgb2html(i)));
     }
 
     *out << "}\n";
 
     *out  << "\\paperw"<< psMap[pageSize].width <<"\\paperh"<< psMap[pageSize].height
-          << "\\margl1134\\margr1134\\margt1134\\margb1134\\sectd" // page margins
-          << "\\plain\\f1\\fs" ;  // Font formatting
+          << R"(\margl1134\margr1134\margt1134\margb1134\sectd)" // page margins
+          << R"(\plain\f1\fs)" ;  // Font formatting
 
     int fontSizeRTF=0;
     StringTools::str2num<int>(fontSizeRTF, fontSize, std::dec);
@@ -152,7 +152,7 @@ void RtfGenerator::printBody()
 
 string RtfGenerator::getFooter()
 {
-    return string();
+    return {};
 }
 
 string RtfGenerator::maskCharacter(unsigned char c)
@@ -848,7 +848,7 @@ string RtfGenerator::maskCP437Character(unsigned char c)
 
     default : {
       if (c ) {
-        return string( 1, c );
+        return string( 1, c );;
       } else {
         return "";
       }

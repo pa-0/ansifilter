@@ -46,7 +46,7 @@ SVGGenerator::SVGGenerator()
     styleCommentClose="*/";
 }
 
-SVGGenerator::~SVGGenerator() {}
+SVGGenerator::~SVGGenerator() = default;
 
 
 string SVGGenerator::getOpenTag()
@@ -76,7 +76,7 @@ string SVGGenerator::getOpenTag()
                          elementStyle.isBold(), elementStyle.isItalic(), elementStyle.isConceal(),
                          elementStyle.isBlink(), elementStyle.isUnderline() );
 
-        std::vector<StyleInfo>::iterator fit = std::find(documentStyles.begin(), documentStyles.end(), sInfo );
+        auto fit = std::find(documentStyles.begin(), documentStyles.end(), sInfo );
         if (fit == documentStyles.end()){
             documentStyles.push_back(sInfo);
             fmtStream << "af_"<< documentStyles.size();
@@ -155,14 +155,14 @@ string SVGGenerator::getHeader()
     }
     header << "?>\n";
     if (!styleSheetPath.empty() ) {
-        header  << "<?xml-stylesheet type=\"text/css\" href=\""
+        header  << R"(<?xml-stylesheet type="text/css" href=")"
                 << styleSheetPath
                 << "\"?>\n";
     }
     header << "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.2//EN\" "
            << "\"http://www.w3.org/Graphics/SVG/1.2/DTD/svg12.dtd\">\n";
-    header << "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" "
-           << "baseProfile=\"full\" xml:space=\"preserve\"";
+    header << R"(<svg xmlns="http://www.w3.org/2000/svg" version="1.2" )"
+           << R"(baseProfile="full" xml:space="preserve")";
     if ( width.size() ) header << " width=\""<<width<<"\"";
     if ( height.size() ) header << " height=\""<<height<<"\"";
 
@@ -229,7 +229,7 @@ string SVGGenerator::maskCharacter ( unsigned  char c )
         return "&quot;";
         break;
     default:
-        return string ( 1, c );
+        return string( 1, c );;
     }
 }
 
