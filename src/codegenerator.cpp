@@ -34,6 +34,8 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
+#include <array>
+
 #include "version.h"
 
 #include "pangogenerator.h"
