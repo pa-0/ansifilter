@@ -1,7 +1,7 @@
 /***************************************************************************
                           rtfcode.cpp  -  description
                              -------------------
-    copyright            : (C) 2007-2023 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -23,6 +23,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <sstream>
+#include <string_view>
 #include <unordered_map>
 
 #include "charcodes.h"
@@ -98,7 +99,7 @@ string  RtfGenerator::getCloseTag()
 
 /* '{{\\field{\\*\\fldinst HYPERLINK "'..token..'" }{\\fldrslt\\ul\\ulc0 '..token..'}}}' */
 
-string RtfGenerator::getHyperlink(string uri, string txt){
+string RtfGenerator::getHyperlink(std::string_view uri, std::string_view txt){
     ostringstream os;
     os <<R"({{\field{\*\fldinst HYPERLINK ")"<<uri<<R"(" }{\fldrslt\ul\ulc0 )"<<txt<<"}}}";
     return os.str();

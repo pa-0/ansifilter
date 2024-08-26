@@ -27,11 +27,12 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 
 // Avoid problems with isspace and UTF-8 characters, use iswspace
 #include <cwctype>
+#include <string_view>
 
 namespace StringTools
 {
 
-string lowerCase(const string& s)
+string lowerCase(std::string_view s)
 {
     char* buf = new char[s.length()];
     s.copy(buf, s.length());
@@ -43,7 +44,7 @@ string lowerCase(const string& s)
 }
 
 // TODO only one function to change case
-string upperCase(const string& s)
+string upperCase(std::string_view s)
 {
     char* buf = new char[s.length()];
     s.copy(buf, s.length());
@@ -52,31 +53,6 @@ string upperCase(const string& s)
     string r(buf, s.length());
     delete[] buf;
     return r;
-}
-
-string trimRight(const string &value)
-{
-    string::size_type where = value.find_last_not_of(" \t\r");
-
-    if (where == string::npos)
-        // string has nothing but space
-        return {};
-
-    if (where == (value.length() - 1))
-        // string has no trailing space, don't copy its contents
-        return value;
-
-    return value.substr(0, where + 1);
-}
-
-string getParantheseVal(const string &s)
-{
-    string::size_type openPos=s.find('(');
-    string::size_type closePos=s.rfind(')');
-    if (openPos ==string::npos || closePos==string::npos) {
-        return {};
-    }
-    return s.substr(openPos+1, closePos-openPos-1);
 }
 
 vector<string> splitString(const string& s, unsigned char delim)

@@ -2,7 +2,7 @@
                           htmlgenerator.h  -  description
                              -------------------
 
-    copyright            : (C) 2007-2023 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -28,6 +28,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #define HTMLGENERATOR_H
 
 #include "codegenerator.h"
+#include <string_view>
 
 namespace ansifilter
 {
@@ -81,7 +82,7 @@ private:
     virtual string maskCharacter(unsigned char );
     virtual string maskCP437Character(unsigned char);
 
-    virtual string getHyperlink(string uri, string txt);
+    virtual string getHyperlink(std::string_view uri, std::string_view txt);
 };
 
 }

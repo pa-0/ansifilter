@@ -35,7 +35,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 namespace ansifilter
 {
 
-StyleColour::StyleColour(const string & red, const string & green, const string & blue)
+StyleColour::StyleColour(std::string_view red, std::string_view green, std::string_view blue)
 {
     ostringstream rgbStream;
     rgbStream << red << " " << green << " " << blue;
@@ -47,17 +47,17 @@ StyleColour::StyleColour()
     rgb.iRed = rgb.iGreen = rgb.iBlue = 0;
 }
 
-StyleColour::StyleColour(const string & styleColourString)
+StyleColour::StyleColour(std::string_view styleColourString)
 {
     setRGB(styleColourString);
 }
 
-void StyleColour::setRGB(const string & styleColourString)
+void StyleColour::setRGB(std::string_view styleColourString)
 {
 
     if (styleColourString.empty()) return;
 
-    istringstream valueStream(styleColourString.c_str());
+    istringstream valueStream(styleColourString.data());
     string r, g, b;
     char c='\0';
     valueStream >> c;
@@ -81,17 +81,17 @@ void StyleColour::setRGB(const string & styleColourString)
     StringTools::str2num<int>(rgb.iBlue,  b, std::hex);
 }
 
-void StyleColour::setRed(const string & red)
+void StyleColour::setRed(std::string_view red)
 {
     StringTools::str2num<int>(rgb.iRed, red, std::hex);
 }
 
-void StyleColour::setGreen(const string & green)
+void StyleColour::setGreen(std::string_view green)
 {
     StringTools::str2num<int>(rgb.iGreen, green, std::hex);
 }
 
-void StyleColour::setBlue(const string & blue)
+void StyleColour::setBlue(std::string_view blue)
 {
     StringTools::str2num<int>(rgb.iBlue, blue, std::hex);
 }
@@ -158,4 +158,3 @@ string StyleColour::float2str(const double num) const
 }
 
 }
-

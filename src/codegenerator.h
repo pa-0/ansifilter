@@ -1,7 +1,7 @@
 /***************************************************************************
                           codegenerator.h  -  description
                              -------------------
-    copyright            : (C) 2007-2023 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -28,6 +28,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <string_view>
 #include <vector>
 #include <iomanip>
 
@@ -76,7 +77,7 @@ namespace ansifilter
 public:
 
     /// Constructor
-    StyleInfo() :  fgColor ( "" ), bgColor ( "" ),  isBold (false),isItalic (false),isConcealed (false), isBlink (false), isUnderLine (false)
+    StyleInfo() :  fgColor ( "" ), bgColor ( "" ), isBold (false), isItalic (false), isConcealed (false), isBlink (false), isUnderLine (false)
     {
     }
 
@@ -351,7 +352,11 @@ protected:
     /** \param uri URI
      *  \param txt Description
      \return returns link formatting sequence */
-    virtual string getHyperlink(string uri, string txt) { return txt+"["+uri+"]"; }
+    virtual string getHyperlink(std::string_view uri, std::string_view txt) {
+        ostringstream os;
+        os << txt << "[" << uri << "]";
+        return os.str();
+    }
 
     /** Tag for inserting line feeds*/
     string newLineTag;

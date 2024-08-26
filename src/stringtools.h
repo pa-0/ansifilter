@@ -27,6 +27,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #define STRINGTOOLS_H
 
 #include <string>
+#include <string_view>
 #include <vector>
 #include <sstream>
 
@@ -41,22 +42,12 @@ namespace StringTools
 /** convert string to lowercase
     \param s String
     \returns lowercase string  */
-string lowerCase(const string &s);
+string lowerCase(std::string_view s);
 
 /** convert string to uppercase
     \param s String
     \returns uppercase string  */
-string upperCase(const string &s);
-
-
-/** \param value String
-   \return string trimmed on the left side
-*/
-string trimRight(const string &value);
-
-/** \param s String, containing a opening and a closing parenthesis
-     \return value between "(", ")" */
-string getParantheseVal(const string &s);
+string upperCase(std::string_view s);
 
 /** \param s string containing tokens
     \param delim Token delimiter
@@ -68,9 +59,9 @@ vector <string> splitString(const string& s, unsigned char delim);
     \param f format specifier function (IO manipulator)
     \return true if successful */
 template <class T>
-bool str2num(T &val, const std::string& s, std::ios_base& (*f)(std::ios_base&))
+bool str2num(T &val, std::string_view s, std::ios_base& (*f)(std::ios_base&))
 {
-    std::istringstream iss(s);
+    std::istringstream iss(s.data());
     return !(iss >> f >> val).fail();
 }
 

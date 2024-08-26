@@ -2,7 +2,7 @@
                     bbcodegenerator.cpp  -  description
                              -------------------
 
-    copyright            : (C) 2011-2023 by Andre Simon
+    copyright            : (C) 2011-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -26,6 +26,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <string_view>
 
 #include "bbcodegenerator.h"
 #include "version.h"
@@ -83,7 +84,7 @@ string BBCodeGenerator::getCloseTag()
 }
 
 //[url=https://www.bbcode.org/]This be bbcode.org![/url]
-string BBCodeGenerator::getHyperlink(string uri, string txt){
+string BBCodeGenerator::getHyperlink(std::string_view uri, std::string_view txt){
     ostringstream os;
     os <<"[url="<<uri<<"]"<<txt<<"[/url]";
     return os.str();

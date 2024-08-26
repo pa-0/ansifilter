@@ -2,7 +2,7 @@
                           rtfcode.h  -  description
                              -------------------
 
-    copyright            : (C) 2007-2023 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -28,6 +28,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <string>
 #include <map>
+#include <string_view>
 #include "codegenerator.h"
 
 
@@ -109,7 +110,7 @@ private:
     /** \return escaped character*/
     virtual string maskCP437Character(unsigned char );
 
-    virtual string getHyperlink(string uri, string txt);
+    virtual string getHyperlink(std::string_view uri, std::string_view txt);
 
     /**\return text formatting attributes in RTF format */
     string  getAttributes( const StyleColour & col);

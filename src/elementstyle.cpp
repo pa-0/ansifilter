@@ -1,7 +1,7 @@
 /***************************************************************************
                           elementstyle.cpp  -  description
                              -------------------
-    copyright            : (C) 2007-2011 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -27,7 +27,6 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 namespace ansifilter
 {
 
-
 ElementStyle::ElementStyle()
     : bold(false), italic(false), underline(false), blink(false),
       reset(true), isNegativeMode(false), conceal(false), bgColorSet(false), fgColorSet(false),
@@ -35,8 +34,7 @@ ElementStyle::ElementStyle()
       bgColID(-1)
 {}
 
-ElementStyle::~ElementStyle()
-= default;
+ElementStyle::~ElementStyle() = default;
 
 bool ElementStyle::isItalic() const
 {
@@ -87,14 +85,12 @@ void  ElementStyle::imageMode(bool negative)
 
 void ElementStyle::setReset(bool b)
 {
-
-
     reset=b;
     if (reset) {
       setFgColour("#000000");
       setFgColourID(0);
       setBgColourID(-1);
-      bold= italic= underline= conceal = blink = bgColorSet = fgColorSet = false;
+      bold = italic = underline = conceal = blink = bgColorSet = fgColorSet = false;
     }
 }
 

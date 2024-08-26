@@ -2,7 +2,7 @@
                      htmlgenerator.cpp  -  description
                              -------------------
 
-    copyright            : (C) 2007-2023 by Andre Simon
+    copyright            : (C) 2007-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -27,6 +27,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <string_view>
 #include <unordered_map>
 
 #include "htmlgenerator.h"
@@ -161,13 +162,14 @@ string HtmlGenerator::getHeader()
     if (parseCP437) {
         os << "  color: #e5e5e5;\n";
     }
+
     os << "}\n\n";
     os << ".af_line {\n";
     os << "  color: gray;\n";
     os << "  text-decoration: none;\n";
     os << "}\n\n";
 
-    if (parseCP437||parseAsciiBin || parseAsciiTundra) {
+    if (parseCP437 || parseAsciiBin || parseAsciiTundra) {
      os << "body {  background-color: black; } \n";
     }
     os << "</style>\n";
@@ -225,9 +227,9 @@ void HtmlGenerator::insertLineNumber ()
     }
 }
 
-string HtmlGenerator::getHyperlink(string uri, string txt){
+string HtmlGenerator::getHyperlink(std::string_view uri, std::string_view txt){
     ostringstream os;
-    os <<"<a href='"<<uri<<"'>"<<txt<<"</a>";
+    os << "<a href='" << uri << "'>" << txt << "</a>";
     return os.str();
 }
 
@@ -262,13 +264,13 @@ bool HtmlGenerator::printDynamicStyleFile ( const string &outPath ) {
                 indexfile<< "display:none;";
             }
 
-            if (sInfo.fgColor!="") {
+            if (sInfo.fgColor.length()) {
                 indexfile << "color:#"
                           << sInfo.fgColor
                           << ";";
             }
 
-            if (sInfo.bgColor!="") {
+            if (sInfo.bgColor.length()) {
                 indexfile << "background-color:#"
                           << sInfo.bgColor
                           << ";";

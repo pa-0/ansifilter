@@ -2,7 +2,7 @@
                          bbcdegenerator.h  -  description
                              -------------------
 
-    copyright            : (C) 2011-2023 by Andre Simon
+    copyright            : (C) 2011-2024 by Andre Simon
     email                : a.simon@mailbox.org
  ***************************************************************************/
 
@@ -28,6 +28,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #define BBCodeGenerator_H
 
 #include <string>
+#include <string_view>
 
 #include "codegenerator.h"
 
@@ -74,7 +75,7 @@ private:
     /** \return escaped character*/
     virtual string maskCharacter(unsigned char );
 
-    virtual string getHyperlink(string uri, string txt);
+    virtual string getHyperlink(std::string_view uri, std::string_view txt);
 
 };
 

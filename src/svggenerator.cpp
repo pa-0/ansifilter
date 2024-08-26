@@ -294,7 +294,7 @@ bool SVGGenerator::printDynamicStyleFile ( const std::string &outPath ) {
                 indexfile<< "display:none;";
             }
 
-            if (sInfo.fgColor!="") {
+            if (sInfo.fgColor.size()) {
                 indexfile << "fill:#"
                           << sInfo.fgColor
                           << ";";

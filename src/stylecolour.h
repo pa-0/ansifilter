@@ -29,6 +29,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include "enums.h"
 
 #include <string>
+#include <string_view>
 
 using std::string;
 using std::ostringstream;
@@ -55,12 +56,12 @@ public:
         \param green Blue value in hex notation
         \param blue Green value in hex notation
     */
-    StyleColour(const string & red, const string & green, const string & blue);
+    StyleColour(std::string_view red, std::string_view green, std::string_view blue);
 
     /** Constructor
         \param styleColourString String with rgb values
     */
-    StyleColour(const string & styleColourString);
+    StyleColour(std::string_view styleColourString);
 
     StyleColour();
     ~StyleColour() {};
@@ -68,19 +69,19 @@ public:
     /** Sets red, green and blue values
       \param styleColourString String containing colour attributes
     */
-    void setRGB(const string & styleColourString);
+    void setRGB(std::string_view styleColourString);
 
     /** Sets red value
         \param red New red value */
-    void setRed(const string & red);
+    void setRed(std::string_view red);
 
     /** Sets green value
         \param green New green value */
-    void setGreen(const string & green);
+    void setGreen(std::string_view green);
 
     /** Sets blue value
         \param blue New blue value */
-    void setBlue(const string & blue);
+    void setBlue(std::string_view  blue);
 
     /**  @param type Output type
          @return Red value in color representation according to output type */

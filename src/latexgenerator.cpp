@@ -26,6 +26,7 @@ along with ANSIFilter.  If not, see <http://www.gnu.org/licenses/>.
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <string_view>
 
 #include "latexgenerator.h"
 #include "version.h"
@@ -72,7 +73,7 @@ string LaTeXGenerator::getCloseTag()
     return "}";
 }
 
-string LaTeXGenerator::getHyperlink(string uri, string txt){
+string LaTeXGenerator::getHyperlink(std::string_view uri, std::string_view txt){
     ostringstream os;
     os <<"\\href{"<<uri<<"}{"<<txt<<"}";
     return os.str();
