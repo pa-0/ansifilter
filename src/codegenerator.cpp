@@ -1081,6 +1081,7 @@ void CodeGenerator::processInput()
   size_t i=0;
   size_t plainTxtCnt=0;
   bool tagOpen=false;
+
   bool isGrepOutput=false;
   bool isKSeq=false;
 
@@ -1186,8 +1187,8 @@ void CodeGenerator::processInput()
             plainTxtCnt-=i;
 
             lineBuf.seekp(showLineNumbers ? 0 : 0, ios::beg);
-            lineBuf<<getOpenTag();
-            tagOpen=true;
+            //lineBuf<<getOpenTag();
+
           }
             // wrap line
           if (lineWrapLen && plainTxtCnt && plainTxtCnt % lineWrapLen==0) {
