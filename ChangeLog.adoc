@@ -2,11 +2,12 @@
 
 === ansifilter 2.21
 
-26.08.2024
+02.09.2024
 
  - removed `using namespace std;` in header files
  - src/makefile: added `-std=c++17` to enable modern C++ features
  - added cmake build script
+ - fix open span tag with CR as opening sequence (https://gitlab.com/saalen/ansifilter/-/issues/43)
  - adapted TCL extension for C++17 compilation (https://gitlab.com/saalen/ansifilter/-/issues/42)
 
 === ansifilter 2.20

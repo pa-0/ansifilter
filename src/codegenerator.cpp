@@ -1182,10 +1182,12 @@ void CodeGenerator::processInput()
         } else {
 
           if ( (cur&0xff)==0x0d && i<line.length()-1) {
+
             plainTxtCnt-=i;
 
             lineBuf.seekp(showLineNumbers ? 0 : 0, ios::beg);
             lineBuf<<getOpenTag();
+            tagOpen=true;
           }
             // wrap line
           if (lineWrapLen && plainTxtCnt && plainTxtCnt % lineWrapLen==0) {
