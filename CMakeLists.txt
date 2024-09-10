@@ -25,10 +25,6 @@ set(GUI_QT_DIR src/qt-gui)
 set(INCLUDE_DIR src)
 
 
-# Include Boost
-find_package(Boost REQUIRED)
-
-
 # Set installation directories
 set(PREFIX /usr)
 set(DATA_DIR ${PREFIX}/share)
@@ -80,12 +76,12 @@ add_library(ansifilter-lib STATIC ${CORE_OBJECTS})
 
 # CLI executable
 add_executable(ansifilter ${CLI_OBJECTS})
-target_link_libraries(ansifilter ansifilter-lib ${LUA_LIBRARIES} ${Boost_LIBRARIES} dl)
+target_link_libraries(ansifilter ansifilter-lib ${LUA_LIBRARIES} dl)
 set_target_properties(ansifilter PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Include directories
-target_include_directories(ansifilter-lib PRIVATE ${INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
-target_include_directories(ansifilter PRIVATE ${INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
+target_include_directories(ansifilter-lib PRIVATE ${INCLUDE_DIR})
+target_include_directories(ansifilter PRIVATE ${INCLUDE_DIR})
 
 # Define custom directories
 target_compile_definitions(ansifilter-lib PRIVATE HL_CONFIG_DIR="${CONF_DIR}" HL_DATA_DIR="${ansifilter_DATA_DIR}" HL_DOC_DIR="${ansifilter_DOC_DIR}")
@@ -102,7 +98,7 @@ install(FILES README.adoc ChangeLog.adoc COPYING INSTALL DESTINATION ${DOC_DIR})
 install(FILES man/ansifilter.1 DESTINATION ${MAN_DIR}/man1)
 install(
     FILES sh-completion/ansifilter.bash
-    RENAME _ansifilter
+    RENAME ansifilter
     DESTINATION ${BASH_COMP_DIR}
 )
 install(FILES sh-completion/ansifilter.fish DESTINATION ${FISH_COMP_DIR})
@@ -112,7 +108,7 @@ install(
     DESTINATION ${ZSH_COMP_DIR}
 )
 install(FILES ansifilter.desktop DESTINATION ${DESKTOP_APPS_DIR} COMPONENT gui)
-install(FILES src/gui-qt/ansifilter.xpm DESTINATION ${DESKTOP_ICONS_DIR} COMPONENT gui)
+install(FILES src/qt-gui/ansifilter.xpm DESTINATION ${DESKTOP_ICONS_DIR} COMPONENT gui)
 
 # Installation of binaries
 install(TARGETS ansifilter DESTINATION ${BIN_DIR} )
@@ -186,12 +182,12 @@ qt_add_resources(GUI_QRC_SOURCES ${GUI_QT_DIR}/ansifilter-gui.qrc)
 # Create the executable
 add_executable(ansifilter-gui ${SOURCES} ${HEADERS} ${FORMS} ${RESOURCES} ${UIS_HDRS})
 
-target_link_libraries(ansifilter-gui Qt::Core Qt::Gui Qt::Widgets ansifilter-lib ${LUA_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(ansifilter-gui Qt::Core Qt::Gui Qt::Widgets ansifilter-lib ${LUA_LIBRARIES})
 
 set_target_properties(ansifilter-gui PROPERTIES AUTOMOC TRUE)
 set_target_properties(ansifilter-gui PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-target_include_directories(ansifilter-gui PRIVATE ${INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
+target_include_directories(ansifilter-gui PRIVATE ${INCLUDE_DIR})
 
 target_compile_definitions(ansifilter-gui PRIVATE HL_CONFIG_DIR="${CONF_DIR}" HL_DATA_DIR="${ansifilter_DATA_DIR}" HL_DOC_DIR="${ansifilter_DOC_DIR}"  -DQT)
 
