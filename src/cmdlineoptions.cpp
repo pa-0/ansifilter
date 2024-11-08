@@ -76,6 +76,7 @@ const Arg_parser::Option options[] = {
     { 'E', "height",     Arg_parser::yes  },
     { 'x', "max-size",   Arg_parser::yes  },
     { 'g', "no-default-fg", Arg_parser::no  },
+    { 'A', "line-append",   Arg_parser::yes  },
 
     {  0,  nullptr,           Arg_parser::no  }
 };
@@ -266,7 +267,9 @@ void CmdLineOptions::parseRuntimeOptions( const int argc, const char *argv[], bo
         case 'E':
             height=arg;
             break;
-
+        case 'A':
+            lineAppendage = arg;
+            break;
         case 'x': {
             StringTools::str2num<off_t> ( maxFileSize, arg, std::dec );
             switch (arg[arg.size()-1]) {
@@ -331,6 +334,11 @@ string CmdLineOptions::getDirName(const string & path)
     size_t dirNameLength=path.rfind(Platform::pathSeparator);
     return (dirNameLength==string::npos)?string():path.substr(0, dirNameLength+1);
 }
+
+string CmdLineOptions::getLineAppendage() {
+    return lineAppendage;
+}
+
 
 bool CmdLineOptions::printVersion()const
 {

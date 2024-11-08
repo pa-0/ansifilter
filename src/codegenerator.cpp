@@ -198,6 +198,11 @@ void CodeGenerator::setTitle(const string & title)
     }
 }
 
+void CodeGenerator::setLineAppendage(const string& a) {
+  lineAppendage = a;
+}
+
+
 string CodeGenerator::getTitle()
 {
     return docTitle;
@@ -1364,6 +1369,7 @@ void CodeGenerator::printNewLine(bool eof) {
         lineStr = lineStr.substr(0, lineBuf.tellp());
     }
     *out << lineStr;
+    *out << lineAppendage;
     *out << newLineTag;
 
     lineBuf.clear();

@@ -86,6 +86,9 @@ public:
     /** \return output file suffix */
     string getOutFileSuffix() const;
 
+    /** \return Line append string */
+    string getLineAppendage();
+
     /** \return Output file format */
     ansifilter::OutputType getOutputType() const;
 
@@ -200,6 +203,7 @@ private:
     string colorMapPath;
     string width;
     string height;
+    string lineAppendage;
 
     int wrapLineLen;
     int asciiArtWidth;

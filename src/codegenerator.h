@@ -334,6 +334,8 @@ public:
     */
     void setSVGSize ( const string& w, const string& h );
 
+    void setLineAppendage(const string& a);
+
 protected:
 
     /** \param type Output type */
@@ -497,6 +499,8 @@ private:
     unsigned int asciiArtWidth;        ///< virtual console column count
     unsigned int asciiArtHeight;       ///< virtual console line count
     unsigned int lineWrapLen; ///< max line length before wrapping
+
+    string lineAppendage; ///< user defined end of line append string
 
     ElementStyle memStyle;
 

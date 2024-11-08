@@ -81,6 +81,7 @@ void ANSIFilterApp::printHelp()
     cout << "  -F, --font=<font>      Set HTML/RTF/SVG font face\n";
     cout << "  -k, --ignore-clear(=0) Do not adhere to clear (ESC K) commands (default: true)\n";
     cout << "  -c, --ignore-csi       Do not adhere to CSI commands (useful for UTF-8 input)\n";
+    cout << "  -A, --line-append=<s>  Output string after each output line\n";
     cout << "  -l, --line-numbers     Print line numbers in output file\n";
     cout << "  -m, --map=<path>       Read color mapping file (see README)\n";
     cout << "  -r, --style-ref=<rf>   Set HTML/TeX/LaTeX/SVG stylesheet path\n";
@@ -197,6 +198,8 @@ int ANSIFilterApp::run( const int argc, const char *argv[] )
         generator->setOmitVersionInfo(options.omitVersionInfo());
 
         generator->setSVGSize ( options.getWidth(), options.getHeight() );
+
+        generator->setLineAppendage ( options.getLineAppendage() );
 
         ansifilter::ParseError error = generator->generateFile(inFileList[i], outFilePath);
 
